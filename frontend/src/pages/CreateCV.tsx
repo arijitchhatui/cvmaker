@@ -1,50 +1,31 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router";
 
 import { useCVsStore } from "../stores/cVsStore";
 import { generateTimeBasedId } from "../utils";
 
-export default function CreateCvPage() {
-  const { cvs, activeCvId, createCV, updateCV } = useCVsStore();
-
-  const isEditing = Boolean(activeCvId);
-  const activeCV = cvs.find((cv) => cv.id === activeCvId);
+export default function CreateCVPage() {
+  const navigate = useNavigate();
+  const { createCV } = useCVsStore();
 
   const [cvName, setCvName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
-  useEffect(() => {
-    if (isEditing && activeCV) {
-      setCvName(activeCV.cvName);
-      setFirstName(activeCV.firstName);
-      setLastName(activeCV.lastName);
-    }
-  }, [activeCV, isEditing]);
-
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    if (isEditing && activeCvId) {
-      updateCV(activeCvId, {
-        cvName,
-        firstName,
-        lastName,
-      });
-      return;
-    }
+    const id = generateTimeBasedId();
 
     createCV({
-      id: generateTimeBasedId(),
+      id,
       cvName,
       firstName,
       lastName,
       middleName: null,
       nickname: null,
       avatar: null,
-      contacts: {
-        email: "",
-        phone: "",
-      },
+      contacts: { email: "", phone: "" },
       address: "",
       summary: "",
       objectives: null,
@@ -60,37 +41,22 @@ export default function CreateCvPage() {
       references: [],
       links: [],
     });
+
+    // 🚀 redirect to edit page
+    navigate(`/edit/${id}`);
   }
 
   return (
     <main className="min-h-screen bg-zinc-950 text-zinc-100 px-6 py-10">
       <div className="mx-auto max-w-2xl space-y-8">
-        {/* 🔔 Mode indicator */}
-        <div
-          className={`rounded-lg border px-4 py-3 text-sm font-medium
-          ${
-            isEditing
-              ? "border-yellow-500/40 bg-yellow-500/10 text-yellow-300"
-              : "border-emerald-500/40 bg-emerald-500/10 text-emerald-300"
-          }`}
-        >
-          {isEditing ? (
-            <>
-              ✏️ You are <strong>editing</strong> the CV:
-              <span className="ml-1 underline">{activeCV?.cvName}</span>
-            </>
-          ) : (
-            <>
-              🆕 You are <strong>creating a new CV</strong>
-            </>
-          )}
+        {/* Mode indicator */}
+        <div className="rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-4 py-3 text-sm font-medium text-emerald-300">
+          🆕 You are <strong>creating a new CV</strong>
         </div>
 
-        {/* 📄 Card */}
+        {/* Card */}
         <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow">
-          <h1 className="mb-6 text-2xl font-semibold">
-            {isEditing ? "Edit CV" : "Create CV"}
-          </h1>
+          <h1 className="mb-6 text-2xl font-semibold">Create CV</h1>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* CV name */}
@@ -137,14 +103,9 @@ export default function CreateCvPage() {
             {/* Submit */}
             <button
               type="submit"
-              className={`w-full rounded-md px-4 py-2 font-medium transition
-              ${
-                isEditing
-                  ? "bg-yellow-500 text-black hover:bg-yellow-400"
-                  : "bg-indigo-600 hover:bg-indigo-500"
-              }`}
+              className="w-full rounded-md bg-indigo-600 px-4 py-2 font-medium transition hover:bg-indigo-500"
             >
-              {isEditing ? "Save changes" : "Create CV"}
+              Create CV
             </button>
           </form>
         </div>

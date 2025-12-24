@@ -38,7 +38,7 @@ export default function HomePage() {
                   {cv.firstName} {cv.lastName}
                 </p>
                 <Link
-                  to={`/cv/${cv.id}`}
+                  to={`/edit/${cv.id}`}
                   className="mt-2 inline-block text-blue-500 hover:underline"
                 >
                   View CV Details
