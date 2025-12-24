@@ -753,7 +753,7 @@ export default function CreateCVPage() {
               type="submit"
               className="w-full rounded-md bg-indigo-600 px-4 py-2 font-medium transition hover:bg-indigo-500"
             >
-              Create CV
+              Create CV Data
             </button>
           </form>
         </div>
