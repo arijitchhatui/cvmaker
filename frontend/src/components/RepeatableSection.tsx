@@ -40,7 +40,6 @@ export default function RepeatableSection<T extends Record<string, unknown>>({
 
   return (
     <div className="space-y-4">
-      {/* Header */}
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold">{title}</h2>
 

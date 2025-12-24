@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
-import EducationSection from "../components/EducationSection";
-import ExperienceSection from "../components/ExperienceSection";
+import RepeatableSection from "../components/RepeatableSection";
 import { useCVsStore } from "../stores/cVsStore";
 import type { CV } from "../types";
 import { generateTimeBasedId } from "../utils";
@@ -260,16 +259,139 @@ export default function CreateCVPage() {
               />
             </div>
 
-            {/* Education */}
-            <EducationSection
-              education={cV.education}
+            <RepeatableSection<CV["education"][number]>
+              title="Education"
+              items={cV.education}
               onChange={(education) => setCV({ ...cV, education })}
+              emptyItem={{
+                institution: "",
+                degree: "",
+                fieldOfStudy: "",
+                startDate: "",
+                endDate: null,
+                grade: null,
+                location: null,
+                description: null,
+              }}
+              fields={[
+                {
+                  name: "institution",
+                  label: "Institution",
+                  type: "text",
+                  required: true,
+                  placeholder: "e.g. University of Example",
+                },
+                {
+                  name: "degree",
+                  label: "Degree",
+                  type: "text",
+                  required: true,
+                  placeholder: "e.g. Bachelor of Science",
+                },
+                {
+                  name: "fieldOfStudy",
+                  label: "Field of Study",
+                  type: "text",
+                  required: true,
+                  placeholder: "e.g. Computer Science",
+                },
+                {
+                  name: "description",
+                  label: "Description",
+                  type: "textarea",
+                  required: false,
+                  placeholder: "A brief description",
+                  rowsTextArea: 4,
+                },
+                {
+                  name: "startDate",
+                  label: "Start date",
+                  type: "month",
+                  required: true,
+                  placeholder: "e.g. 2020-09",
+                },
+                {
+                  name: "endDate",
+                  label: "End date",
+                  type: "month",
+                  required: false,
+                  placeholder: "e.g. 2024-06",
+                },
+                {
+                  name: "location",
+                  label: "Location",
+                  type: "text",
+                  required: false,
+                  placeholder: "e.g. City, Country",
+                },
+                {
+                  name: "grade",
+                  label: "Grade",
+                  type: "text",
+                  required: false,
+                  placeholder: "e.g. 3.8 GPA",
+                },
+              ]}
             />
 
-            {/* Experience */}
-            <ExperienceSection
-              experience={cV.experience}
+            <RepeatableSection<CV["experience"][number]>
+              title="Experience"
+              items={cV.experience}
               onChange={(experience) => setCV({ ...cV, experience })}
+              emptyItem={{
+                company: "",
+                position: "",
+                startDate: "",
+                endDate: null,
+                responsibilities: null,
+                location: null,
+              }}
+              fields={[
+                {
+                  name: "company",
+                  label: "Company",
+                  type: "text",
+                  required: true,
+                  placeholder: "e.g. Example Corp",
+                },
+                {
+                  name: "position",
+                  label: "Position",
+                  type: "text",
+                  required: true,
+                  placeholder: "e.g. Software Engineer",
+                },
+                {
+                  name: "startDate",
+                  label: "Start date",
+                  type: "month",
+                  required: true,
+                  placeholder: "e.g. 2020-09",
+                },
+                {
+                  name: "endDate",
+                  label: "End date",
+                  type: "month",
+                  required: false,
+                  placeholder: "e.g. 2024-06",
+                },
+                {
+                  name: "location",
+                  label: "Location",
+                  type: "text",
+                  required: false,
+                  placeholder: "e.g. City, Country",
+                },
+                {
+                  name: "responsibilities",
+                  label: "Responsibilities",
+                  type: "textarea",
+                  required: false,
+                  placeholder:
+                    "Describe your responsibilities and achievements",
+                  rowsTextArea: 4,
+                },
+              ]}
             />
 
             <button
