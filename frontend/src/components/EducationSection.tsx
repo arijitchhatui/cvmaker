@@ -88,6 +88,7 @@ export default function EducationSection({
                 updateEducation(index, "institution", e.target.value)
               }
               placeholder="e.g. University of Example"
+              required
               className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2"
             />
           </div>
@@ -100,6 +101,7 @@ export default function EducationSection({
               value={edu.degree}
               onChange={(e) => updateEducation(index, "degree", e.target.value)}
               placeholder="e.g. Bachelor of Science"
+              required
               className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2"
             />
           </div>
@@ -114,6 +116,7 @@ export default function EducationSection({
                 updateEducation(index, "fieldOfStudy", e.target.value)
               }
               placeholder="e.g. Computer Science"
+              required
               className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2"
             />
           </div>
@@ -130,6 +133,7 @@ export default function EducationSection({
                   updateEducation(index, "startDate", e.target.value)
                 }
                 placeholder="e.g. 2020-09"
+                required
                 className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2"
               />
             </div>

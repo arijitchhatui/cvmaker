@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 
 import EducationSection from "../components/EducationSection";
+import ExperienceSection from "../components/ExperienceSection";
 import { useCVsStore } from "../stores/cVsStore";
 import type { CV } from "../types";
 import { generateTimeBasedId } from "../utils";
@@ -244,6 +245,12 @@ export default function CreateCVPage() {
             <EducationSection
               education={cV.education}
               onChange={(education) => setCV({ ...cV, education })}
+            />
+
+            {/* Experience */}
+            <ExperienceSection
+              experience={cV.experience}
+              onChange={(experience) => setCV({ ...cV, experience })}
             />
 
             <button
