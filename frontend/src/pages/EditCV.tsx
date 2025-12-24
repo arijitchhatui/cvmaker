@@ -11,37 +11,55 @@ export default function EditCVPage() {
   const cvFinded = cvs.find((cv) => cv.id === id);
 
   const [cv, setCV] = useState<CV>({
-    id: cvFinded?.id ?? "",
-    cvName: cvFinded?.cvName ?? "",
-    firstName: cvFinded?.firstName ?? "",
-    lastName: cvFinded?.lastName ?? "",
-    middleName: cvFinded?.middleName ?? null,
-    nickname: cvFinded?.nickname ?? null,
-    avatar: cvFinded?.avatar ?? null,
-    contacts: cvFinded?.contacts ?? { email: "", phone: "" },
-    address: cvFinded?.address ?? "",
-    summary: cvFinded?.summary ?? "",
-    objectives: cvFinded?.objectives ?? null,
-    education: cvFinded?.education ?? [],
-    experience: cvFinded?.experience ?? [],
-    skills: cvFinded?.skills ?? [],
-    projects: cvFinded?.projects ?? [],
-    certifications: cvFinded?.certifications ?? [],
-    languages: cvFinded?.languages ?? [],
-    hobbies: cvFinded?.hobbies ?? [],
-    additionalInfo: cvFinded?.additionalInfo ?? null,
-    otherExperiences: cvFinded?.otherExperiences ?? [],
-    references: cvFinded?.references ?? [],
-    links: cvFinded?.links ?? [],
+    id: cvFinded?.id || "",
+    cvName: cvFinded?.cvName || "",
+    firstName: cvFinded?.firstName || "",
+    lastName: cvFinded?.lastName || "",
+    middleName: cvFinded?.middleName || null,
+    nickname: cvFinded?.nickname || null,
+    avatar: cvFinded?.avatar || null,
+    contacts: cvFinded?.contacts || { email: "", phone: "" },
+    address: cvFinded?.address || "",
+    summary: cvFinded?.summary || "",
+    objectives: cvFinded?.objectives || null,
+    education: cvFinded?.education || [],
+    experience: cvFinded?.experience || [],
+    skills: cvFinded?.skills || [],
+    projects: cvFinded?.projects || [],
+    certifications: cvFinded?.certifications || [],
+    languages: cvFinded?.languages || [],
+    hobbies: cvFinded?.hobbies || [],
+    additionalInfo: cvFinded?.additionalInfo || null,
+    otherExperiences: cvFinded?.otherExperiences || [],
+    references: cvFinded?.references || [],
+    links: cvFinded?.links || [],
   });
 
-  function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent, cvFindedId: CV["id"]) {
     e.preventDefault();
 
-    updateCV(cvFinded?.id ?? "", {
+    updateCV(cvFindedId, {
       cvName: cv.cvName,
       firstName: cv.firstName,
       lastName: cv.lastName,
+      middleName: cv.middleName,
+      nickname: cv.nickname,
+      avatar: cv.avatar,
+      contacts: cv.contacts,
+      address: cv.address,
+      summary: cv.summary,
+      objectives: cv.objectives,
+      education: cv.education,
+      experience: cv.experience,
+      skills: cv.skills,
+      projects: cv.projects,
+      certifications: cv.certifications,
+      languages: cv.languages,
+      hobbies: cv.hobbies,
+      additionalInfo: cv.additionalInfo,
+      otherExperiences: cv.otherExperiences,
+      references: cv.references,
+      links: cv.links,
     });
   }
 
@@ -64,7 +82,10 @@ export default function EditCVPage() {
         <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow">
           <h1 className="mb-6 text-2xl font-semibold">Edit CV</h1>
 
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form
+            onSubmit={(e) => handleSubmit(e, cvFinded.id)}
+            className="space-y-5"
+          >
             <div>
               <label className="mb-1 block text-sm text-zinc-400">
                 CV name
