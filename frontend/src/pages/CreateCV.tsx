@@ -155,6 +155,7 @@ export default function CreateCVPage() {
               </label>
               <input
                 type="file"
+                accept="image/*"
                 onChange={(e) => {
                   const file = e.target.files?.[0];
                   if (file) {
