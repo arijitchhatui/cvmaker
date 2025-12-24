@@ -1,7 +1,7 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
+export interface CV {
+  id: string;
+  cvName: string;
 
-export interface CVStore {
   firstName: string;
   middleName: string | null;
   lastName: string;
@@ -71,45 +71,4 @@ export interface CVStore {
     label: string;
     url: string;
   }>;
-
-  setCVData: (data: Partial<CVStore>) => void;
 }
-
-export const useCVStore = create<CVStore>()(
-  persist(
-    (set) => ({
-      firstName: "",
-      middleName: null,
-      lastName: "",
-      nickname: null,
-      avatar: null,
-      contacts: {
-        email: "",
-        phone: "",
-      },
-      address: "",
-      summary: "",
-      objectives: null,
-      education: [],
-      experience: [],
-      skills: [],
-      projects: [],
-      certifications: [],
-      languages: [],
-      hobbies: [],
-      additionalInfo: null,
-      otherExperiences: [],
-      references: [],
-      links: [],
-
-      setCVData: (data: Partial<CVStore>) =>
-        set((state) => ({
-          ...state,
-          ...data,
-        })),
-    }),
-    {
-      name: "cv-storage",
-    },
-  ),
-);
