@@ -96,8 +96,8 @@ export default function EditCVPage() {
   }
 
   return (
-    <main className="min-h-screen bg-zinc-950 text-zinc-100 px-6 py-10">
-      <div className="mx-auto sm:max-w-5xl max-w-2xl space-y-8">
+    <main className="min-h-screen bg-zinc-950 px-6 py-10 text-zinc-100">
+      <div className="mx-auto max-w-2xl space-y-8 sm:max-w-5xl">
         <div className="rounded-lg border border-yellow-500/40 bg-yellow-500/10 px-4 py-3 text-sm font-medium text-yellow-300">
           ✏️ You are <strong>editing</strong> the CV:
           <span className="ml-1 underline">{cV.cVName}</span>
@@ -105,11 +105,11 @@ export default function EditCVPage() {
 
         <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow">
           <div>
-            <div className="flex items-center justify-between mb-6">
+            <div className="mb-6 flex items-center justify-between">
               <h1 className="text-2xl font-semibold">Edit CV</h1>
               <button
                 onClick={() => handleDelete(cVFinded.id)}
-                className="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-500 transition"
+                className="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-500"
               >
                 Delete CV
               </button>

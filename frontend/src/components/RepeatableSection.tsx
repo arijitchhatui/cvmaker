@@ -56,7 +56,7 @@ export default function RepeatableSection<T extends Record<string, unknown>>({
         <button
           type="button"
           onClick={addItem}
-          className="rounded-md border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 text-sm font-medium text-emerald-300 hover:bg-emerald-500/20 transition"
+          className="rounded-md border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 text-sm font-medium text-emerald-300 transition hover:bg-emerald-500/20"
         >
           + Add {title.toLowerCase()}
         </button>
@@ -71,7 +71,7 @@ export default function RepeatableSection<T extends Record<string, unknown>>({
       {items.map((item, index) => (
         <div
           key={index}
-          className="rounded-lg mt-6 border border-zinc-800 bg-zinc-950 p-4 space-y-4"
+          className="mt-6 space-y-4 rounded-lg border border-zinc-800 bg-zinc-950 p-4"
         >
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium text-zinc-300">
@@ -81,7 +81,7 @@ export default function RepeatableSection<T extends Record<string, unknown>>({
             <button
               type="button"
               onClick={() => removeItem(index)}
-              className="text-sm text-red-400 hover:text-red-300 transition"
+              className="text-sm text-red-400 transition hover:text-red-300"
             >
               − Remove
             </button>

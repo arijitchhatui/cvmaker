@@ -99,12 +99,12 @@ export default function FormSection({
           className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2"
         />
         {cV.avatar && (
-          <div className="flex items-center space-x-4 mt-2">
+          <div className="mt-2 flex items-center space-x-4">
             <div className="mt-2">
               <img
                 src={cV.avatar}
                 alt="Avatar Preview"
-                className="h-20 w-20 rounded-full object-cover border border-zinc-700"
+                className="h-20 w-20 rounded-full border border-zinc-700 object-cover"
               />
             </div>
             <button

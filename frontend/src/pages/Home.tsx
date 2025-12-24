@@ -18,7 +18,7 @@ export default function HomePage() {
   }
 
   return (
-    <main className="min-h-screen bg-zinc-950 text-zinc-100 px-6 py-10">
+    <main className="min-h-screen bg-zinc-950 px-6 py-10 text-zinc-100">
       <div className="mx-auto max-w-2xl space-y-8">
         <div className="rounded-lg border border-indigo-500/40 bg-indigo-500/10 px-4 py-3 text-sm font-medium text-indigo-300">
           Welcome back. You have{" "}
@@ -28,13 +28,13 @@ export default function HomePage() {
           saved.
         </div>
 
-        <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow space-y-6">
+        <div className="space-y-6 rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-semibold">Your CVs</h1>
 
             <Link
               to="/create"
-              className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-500 transition"
+              className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-indigo-500"
             >
               Create CV
             </Link>
@@ -81,7 +81,7 @@ export default function HomePage() {
               ))}
             </ul>
           ) : (
-            <div className="rounded-lg border border-zinc-800 bg-zinc-950 px-4 py-6 text-zinc-400 text-sm">
+            <div className="rounded-lg border border-zinc-800 bg-zinc-950 px-4 py-6 text-sm text-zinc-400">
               No CVs yet. Click <strong>Create CV</strong> to get started.
             </div>
           )}

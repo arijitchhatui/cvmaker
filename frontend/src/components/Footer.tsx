@@ -2,7 +2,7 @@ import { Link } from "react-router";
 
 export function Footer() {
   return (
-    <footer className="border-t border-zinc-800 bg-zinc-950 flex flex-col">
+    <footer className="flex flex-col border-t border-zinc-800 bg-zinc-950">
       <div className="mx-auto max-w-4xl px-6 py-4 text-xs text-zinc-500">
         © {new Date().getFullYear()} CV Maker. All rights reserved.
       </div>
