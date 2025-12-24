@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
+import EducationSection from "../components/EducationSection";
 import { useCVsStore } from "../stores/cVsStore";
 import type { CV } from "../types";
 import { generateTimeBasedId } from "../utils";
@@ -239,7 +240,11 @@ export default function CreateCVPage() {
               />
             </div>
 
-            {/* Education HERE, vai ter um botao pra adicionar mais, FAÇA O BOTAO e os campos */}
+            {/* Education */}
+            <EducationSection
+              education={cV.education}
+              onChange={(education) => setCV({ ...cV, education })}
+            />
 
             <button
               type="submit"
