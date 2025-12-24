@@ -44,7 +44,7 @@ export default function HomePage() {
                     </div>
 
                     <Link
-                      to={`/cv/${cv.id}`}
+                      to={`/edit/${cv.id}`}
                       className="text-sm font-medium text-indigo-400 hover:underline"
                     >
                       Edit
