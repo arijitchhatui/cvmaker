@@ -34,12 +34,16 @@ export default function CreateCVPage() {
     otherExperiences: [],
     references: [],
     links: [],
+    createdAt: "",
+    updatedAt: "",
   });
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     const id = generateTimeBasedId();
+
+    const now = new Date().toISOString();
 
     createCV({
       id,
@@ -64,6 +68,8 @@ export default function CreateCVPage() {
       otherExperiences: cV.otherExperiences,
       references: cV.references,
       links: cV.links,
+      createdAt: now,
+      updatedAt: now,
     });
 
     toast.success("CV created successfully.");

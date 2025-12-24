@@ -38,6 +38,8 @@ export default function EditCVPage() {
     otherExperiences: cVFinded?.otherExperiences || [],
     references: cVFinded?.references || [],
     links: cVFinded?.links || [],
+    createdAt: cVFinded?.createdAt || "",
+    updatedAt: cVFinded?.updatedAt || "",
   });
 
   function handleSubmit(e: React.FormEvent, cVFindedId: CV["id"]) {
@@ -65,6 +67,7 @@ export default function EditCVPage() {
       otherExperiences: cV.otherExperiences,
       references: cV.references,
       links: cV.links,
+      updatedAt: new Date().toISOString(),
     });
 
     toast.success("CV updated successfully.");

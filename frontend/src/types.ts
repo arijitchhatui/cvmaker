@@ -76,4 +76,7 @@ export interface CV {
     label: string;
     url: string;
   }>;
+
+  createdAt: string;
+  updatedAt: string;
 }

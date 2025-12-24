@@ -2,11 +2,12 @@ import { Link } from "react-router";
 import { toast } from "react-toastify";
 
 import { useCVsStore } from "../stores/cVsStore";
+import type { CV } from "../types";
 
 export default function HomePage() {
   const { cvs, deleteCV } = useCVsStore();
 
-  function handleDelete(cvId: string) {
+  function handleDelete(cvId: CV["id"]) {
     if (confirm("Are you sure you want to delete this CV?")) {
       deleteCV(cvId);
 
