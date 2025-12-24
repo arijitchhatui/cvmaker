@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import FormSection from "../components/FormSection";
 import { useCVsStore } from "../stores/cVsStore";
 import type { CV } from "../types";
+import NotFoundPage from "./NotFound";
 
 export default function EditCVPage() {
   const { id } = useParams<{ id: string }>();
@@ -83,9 +84,11 @@ export default function EditCVPage() {
 
   if (!cVFinded) {
     return (
-      <main className="min-h-screen bg-zinc-950 text-zinc-100 p-10">
-        CV not found
-      </main>
+      <NotFoundPage
+        title="CV Not Found"
+        subtitle="CV does not exist"
+        description="The CV you are trying to edit does not exist."
+      />
     );
   }
 
