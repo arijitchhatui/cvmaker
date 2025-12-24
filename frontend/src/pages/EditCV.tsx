@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router";
 import { toast } from "react-toastify";
 
+import FormSection from "../components/FormSection";
 import { useCVsStore } from "../stores/cVsStore";
 import type { CV } from "../types";
 
@@ -105,44 +106,11 @@ export default function EditCVPage() {
             </div>
           </div>
 
-          <form
-            onSubmit={(e) => handleSubmit(e, cvFinded.id)}
-            className="space-y-5"
-          >
-            <div>
-              <label className="mb-1 block text-sm text-zinc-400">
-                CV name
-              </label>
-              <input
-                value={cv.cvName}
-                onChange={(e) => setCV({ ...cv, cvName: e.target.value })}
-                placeholder="e.g. My Awesome CV"
-                className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2"
-              />
-            </div>
-
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <input
-                value={cv.firstName}
-                onChange={(e) => setCV({ ...cv, firstName: e.target.value })}
-                placeholder="e.g. John"
-                className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2"
-              />
-              <input
-                value={cv.lastName}
-                onChange={(e) => setCV({ ...cv, lastName: e.target.value })}
-                placeholder="e.g. Doe"
-                className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2"
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="w-full rounded-md bg-yellow-500 px-4 py-2 font-medium text-black hover:bg-yellow-400"
-            >
-              Save changes
-            </button>
-          </form>
+          <FormSection
+            cV={cv}
+            setCV={setCV}
+            handleSubmit={(e) => handleSubmit(e, cvFinded.id)}
+          />
         </div>
       </div>
     </main>
