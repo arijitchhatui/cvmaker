@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 type FieldType = "text" | "month" | "textarea";
 
 export interface FieldConfig<T> {
@@ -26,6 +28,10 @@ export default function RepeatableSection<T extends Record<string, unknown>>({
 }: RepeatableSectionProps<T>) {
   function addItem() {
     onChange([...items, structuredClone(emptyItem)]);
+
+    toast.info(`Added new ${title.toLowerCase()} #${items.length + 1}.`, {
+      autoClose: 1000,
+    });
   }
 
   function updateItem(index: number, field: keyof T, value: unknown) {
@@ -36,6 +42,10 @@ export default function RepeatableSection<T extends Record<string, unknown>>({
 
   function removeItem(index: number) {
     onChange(items.filter((_, i) => i !== index));
+
+    toast.info(`Removed ${title.toLowerCase()} #${index + 1}.`, {
+      autoClose: 1000,
+    });
   }
 
   return (

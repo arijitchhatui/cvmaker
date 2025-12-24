@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router";
+import { ToastContainer } from "react-toastify";
 
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
@@ -10,6 +11,7 @@ import NotFoundPage from "./pages/NotFound";
 function App() {
   return (
     <BrowserRouter>
+      <ToastContainer autoClose={3500} />
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />

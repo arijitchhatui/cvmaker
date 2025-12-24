@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { toast } from "react-toastify";
 
 import { useCVsStore } from "../stores/cVsStore";
 
@@ -8,6 +9,10 @@ export default function HomePage() {
   function handleDelete(cvId: string) {
     if (confirm("Are you sure you want to delete this CV?")) {
       deleteCV(cvId);
+
+      toast.success("CV deleted successfully.");
+    } else {
+      toast.info("CV deletion cancelled.", { autoClose: 1500 });
     }
   }
 
