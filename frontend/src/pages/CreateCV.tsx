@@ -19,9 +19,9 @@ export default function CreateCVPage() {
     middleName: null,
     nickname: null,
     avatar: null,
-    contacts: { email: "", phone: "" },
-    address: "",
-    summary: "",
+    contacts: { email: null, phone: null },
+    address: null,
+    summary: null,
     objectives: null,
     education: [],
     experience: [],
@@ -43,7 +43,7 @@ export default function CreateCVPage() {
 
     const id = generateTimeBasedId();
 
-    const now = new Date().toISOString();
+    const now = Date.now().toString();
 
     createCV({
       id,
