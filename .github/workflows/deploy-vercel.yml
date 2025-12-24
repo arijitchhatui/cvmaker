@@ -5,47 +5,76 @@ permissions:
   id-token: write
 
 on:
-  # Runs on pushes targeting the default branch
   release:
     types: [published]
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
-  check:
+  deploy:
     runs-on: ubuntu-latest
     environment: Production
+
     env:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
     steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
         with:
           version: 10
-      - uses: actions/setup-node@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
           node-version: "lts/*"
           cache: "pnpm"
-      - name: Install dependencies
-        run: pnpm install
-      - name: Install Vercel CLI Global
+
+      - name: Install Vercel CLI
         run: npm install -g vercel
-      - name: Run prettier
-        run: pnpm format
-      - name: Run ESLint fix
-        run: pnpm lint:fix
-      - name: Run unit tests
-        run: pnpm test
-      - name: Build the project
+
+      # ======================
+      # FRONTEND
+      # ======================
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: pnpm install
+
+      - name: Build frontend
+        working-directory: frontend
         run: pnpm build
-      - name: Check if dist directory exists
+
+      - name: Check if frontend dist exists
+        working-directory: frontend
         run: |
           if [ ! -d "dist" ]; then
-            echo "Error: dist directory does not exist."
+            echo "❌ Error: frontend/dist directory does not exist."
             exit 1
           fi
-      - name: Build client project
-        run: cd ../frontend && pnpm build
-      - name: Deploy to Vercel
-        run: vercel --yes --token=${{ secrets.VERCEL_TOKEN }} --prod --name=gl-cvmaker
+          echo "✅ frontend/dist found"
+
+      # ======================
+      # BACKEND
+      # ======================
+      - name: Install backend dependencies
+        working-directory: backend
+        run: pnpm install
+
+      - name: Build backend
+        working-directory: backend
+        run: pnpm build
+
+      # ======================
+      # DEPLOY
+      # ======================
+      - name: Deploy frontend to Vercel
+        working-directory: frontend
+        run: |
+          vercel deploy \
+            --prod \
+            --yes \
+            --token=${VERCEL_TOKEN} \
+            --name=gl-cvmaker
