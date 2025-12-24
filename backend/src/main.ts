@@ -3,6 +3,7 @@ import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
 import type { NestExpressApplication } from "@nestjs/platform-express";
 import helmet from "helmet";
+import { join } from "path";
 
 import { AppModule } from "./app.module";
 import type { EnvGlobalConfig } from "./configs/env.global";
@@ -23,6 +24,8 @@ async function bootstrap(): Promise<void> {
 
     app.set("trust proxy", true);
   }
+
+  app.useStaticAssets(join(__dirname, "..", "..", "frontend", "dist"));
 
   app.setGlobalPrefix(apiPrefix);
 
