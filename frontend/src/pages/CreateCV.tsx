@@ -2,15 +2,37 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 
 import { useCVsStore } from "../stores/cVsStore";
+import type { CV } from "../types";
 import { generateTimeBasedId } from "../utils";
 
 export default function CreateCVPage() {
   const navigate = useNavigate();
   const { createCV } = useCVsStore();
 
-  const [cvName, setCvName] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [cV, setCV] = useState<CV>({
+    id: "",
+    cvName: "",
+    firstName: "",
+    lastName: "",
+    middleName: null,
+    nickname: null,
+    avatar: null,
+    contacts: { email: "", phone: "" },
+    address: "",
+    summary: "",
+    objectives: null,
+    education: [],
+    experience: [],
+    skills: [],
+    projects: [],
+    certifications: [],
+    languages: [],
+    hobbies: [],
+    additionalInfo: null,
+    otherExperiences: [],
+    references: [],
+    links: [],
+  });
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -19,70 +41,66 @@ export default function CreateCVPage() {
 
     createCV({
       id,
-      cvName,
-      firstName,
-      lastName,
-      middleName: null,
-      nickname: null,
-      avatar: null,
-      contacts: { email: "", phone: "" },
-      address: "",
-      summary: "",
-      objectives: null,
-      education: [],
-      experience: [],
-      skills: [],
-      projects: [],
-      certifications: [],
-      languages: [],
-      hobbies: [],
-      additionalInfo: null,
-      otherExperiences: [],
-      references: [],
-      links: [],
+      cvName: cV.cvName,
+      firstName: cV.firstName,
+      lastName: cV.lastName,
+      middleName: cV.middleName,
+      nickname: cV.nickname,
+      avatar: cV.avatar,
+      contacts: cV.contacts,
+      address: cV.address,
+      summary: cV.summary,
+      objectives: cV.objectives,
+      education: cV.education,
+      experience: cV.experience,
+      skills: cV.skills,
+      projects: cV.projects,
+      certifications: cV.certifications,
+      languages: cV.languages,
+      hobbies: cV.hobbies,
+      additionalInfo: cV.additionalInfo,
+      otherExperiences: cV.otherExperiences,
+      references: cV.references,
+      links: cV.links,
     });
 
-    // 🚀 redirect to edit page
     navigate(`/edit/${id}`);
   }
 
   return (
     <main className="min-h-screen bg-zinc-950 text-zinc-100 px-6 py-10">
       <div className="mx-auto max-w-2xl space-y-8">
-        {/* Mode indicator */}
         <div className="rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-4 py-3 text-sm font-medium text-emerald-300">
           🆕 You are <strong>creating a new CV</strong>
         </div>
 
-        {/* Card */}
         <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow">
           <h1 className="mb-6 text-2xl font-semibold">Create CV</h1>
 
           <form onSubmit={handleSubmit} className="space-y-5">
-            {/* CV name */}
             <div>
               <label className="mb-1 block text-sm text-zinc-400">
                 CV name
               </label>
               <input
-                value={cvName}
-                onChange={(e) => setCvName(e.target.value)}
+                value={cV.cvName}
+                onChange={(e) => setCV({ ...cV, cvName: e.target.value })}
                 required
                 placeholder="e.g. Frontend Developer – EN"
                 className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 outline-none focus:border-indigo-500"
               />
             </div>
 
-            {/* Person name */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
                 <label className="mb-1 block text-sm text-zinc-400">
                   First name
                 </label>
                 <input
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
+                  value={cV.firstName}
+                  onChange={(e) => setCV({ ...cV, firstName: e.target.value })}
                   required
+                  placeholder="e.g. John"
                   className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2"
                 />
               </div>
@@ -92,15 +110,15 @@ export default function CreateCVPage() {
                   Last name
                 </label>
                 <input
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
+                  value={cV.lastName}
+                  onChange={(e) => setCV({ ...cV, lastName: e.target.value })}
                   required
+                  placeholder="e.g. Doe"
                   className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2"
                 />
               </div>
             </div>
 
-            {/* Submit */}
             <button
               type="submit"
               className="w-full rounded-md bg-indigo-600 px-4 py-2 font-medium transition hover:bg-indigo-500"
