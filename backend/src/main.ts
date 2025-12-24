@@ -1,10 +1,13 @@
-import { Logger } from "@nestjs/common";
+import { Logger, ValidationPipe } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
 import type { NestExpressApplication } from "@nestjs/platform-express";
+import helmet from "helmet";
 
 import { AppModule } from "./app.module";
 import type { EnvGlobalConfig } from "./configs/env.global";
+import swaggerInitializer from "./configs/swagger";
+import { apiPrefix } from "./shared/constants";
 
 const logger = new Logger("Bootstrap");
 
@@ -16,8 +19,16 @@ async function bootstrap(): Promise<void> {
   const { nodeEnv, port } = configService.get("server", { infer: true });
 
   if (nodeEnv === "production") {
+    app.use(helmet());
+
     app.set("trust proxy", true);
   }
+
+  app.setGlobalPrefix(apiPrefix);
+
+  swaggerInitializer(app);
+
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
 
   await app.listen(port);
 
