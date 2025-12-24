@@ -8,11 +8,11 @@ export interface CV {
   nickname: string | null;
   avatar: string | null;
   contacts: {
-    email: string;
-    phone: string;
+    email: string | null;
+    phone: string | null;
   };
-  address: string;
-  summary: string;
+  address: string | null;
+  summary: string | null;
   objectives: string | null;
   education: Array<{
     institution: string;

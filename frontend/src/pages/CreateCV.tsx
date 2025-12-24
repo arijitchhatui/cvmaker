@@ -80,7 +80,7 @@ export default function CreateCVPage() {
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label className="mb-1 block text-sm text-zinc-400">
-                CV name
+                CV name <span className="text-red-500">*</span>
               </label>
               <input
                 value={cV.cvName}
@@ -94,7 +94,7 @@ export default function CreateCVPage() {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
                 <label className="mb-1 block text-sm text-zinc-400">
-                  First name
+                  First name <span className="text-red-500">*</span>
                 </label>
                 <input
                   value={cV.firstName}
@@ -107,7 +107,7 @@ export default function CreateCVPage() {
 
               <div>
                 <label className="mb-1 block text-sm text-zinc-400">
-                  Last name
+                  Last name <span className="text-red-500">*</span>
                 </label>
                 <input
                   value={cV.lastName}
@@ -118,6 +118,128 @@ export default function CreateCVPage() {
                 />
               </div>
             </div>
+
+            <div>
+              <label className="mb-1 block text-sm text-zinc-400">
+                Middle name
+              </label>
+              <input
+                value={cV.middleName || ""}
+                onChange={(e) =>
+                  setCV({ ...cV, middleName: e.target.value || null })
+                }
+                placeholder="e.g. Michael"
+                className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2"
+              />
+            </div>
+
+            <div>
+              <label className="mb-1 block text-sm text-zinc-400">
+                Nickname
+              </label>
+              <input
+                value={cV.nickname || ""}
+                onChange={(e) =>
+                  setCV({ ...cV, nickname: e.target.value || null })
+                }
+                placeholder="e.g. Johnny"
+                className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2"
+              />
+            </div>
+
+            <div>
+              <label className="mb-1 block text-sm text-zinc-400">
+                Avatar URL
+              </label>
+              <input
+                type="file"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                      setCV({ ...cV, avatar: reader.result as string });
+                    };
+                    reader.readAsDataURL(file);
+                  }
+                }}
+                className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2"
+              />
+            </div>
+
+            <div>
+              <label className="mb-1 block text-sm text-zinc-400">
+                Contact Email
+              </label>
+              <input
+                type="email"
+                value={cV.contacts.email || ""}
+                onChange={(e) =>
+                  setCV({
+                    ...cV,
+                    contacts: { ...cV.contacts, email: e.target.value },
+                  })
+                }
+                placeholder="e.g. foo@bar.com"
+                className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2"
+              />
+            </div>
+
+            <div>
+              <label className="mb-1 block text-sm text-zinc-400">
+                Contact Phone
+              </label>
+              <input
+                type="tel"
+                value={cV.contacts.phone || ""}
+                onChange={(e) =>
+                  setCV({
+                    ...cV,
+                    contacts: { ...cV.contacts, phone: e.target.value },
+                  })
+                }
+                placeholder="e.g. +1 234 567 890"
+                className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2"
+              />
+            </div>
+
+            <div>
+              <label className="mb-1 block text-sm text-zinc-400">
+                Address
+              </label>
+              <input
+                value={cV.address || ""}
+                onChange={(e) => setCV({ ...cV, address: e.target.value })}
+                placeholder="e.g. 123 Main St, City, Country"
+                className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2"
+              />
+            </div>
+
+            <div>
+              <label className="mb-1 block text-sm text-zinc-400">
+                Summary
+              </label>
+              <textarea
+                value={cV.summary || ""}
+                onChange={(e) => setCV({ ...cV, summary: e.target.value })}
+                placeholder="A brief summary about yourself"
+                className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2"
+              />
+            </div>
+
+            <div>
+              <label className="mb-1 block text-sm text-zinc-400">
+                Objectives
+              </label>
+              <textarea
+                value={cV.objectives || ""}
+                onChange={(e) => setCV({ ...cV, objectives: e.target.value })}
+                placeholder="Your career objectives"
+                className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2"
+              />
+            </div>
+
+            {/* Education HERE, vai ter um botao pra adicionar mais, FAÇA O BOTAO e os campos */}
 
             <button
               type="submit"
