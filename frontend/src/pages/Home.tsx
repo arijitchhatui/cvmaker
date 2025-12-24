@@ -3,7 +3,13 @@ import { Link } from "react-router";
 import { useCVsStore } from "../stores/cVsStore";
 
 export default function HomePage() {
-  const { cvs } = useCVsStore();
+  const { cvs, deleteCV } = useCVsStore();
+
+  function handleDelete(cvId: string) {
+    if (confirm("Are you sure you want to delete this CV?")) {
+      deleteCV(cvId);
+    }
+  }
 
   return (
     <main className="min-h-screen bg-zinc-950 text-zinc-100 px-6 py-10">
@@ -43,12 +49,20 @@ export default function HomePage() {
                       </p>
                     </div>
 
-                    <Link
-                      to={`/edit/${cv.id}`}
-                      className="text-sm font-medium text-indigo-400 hover:underline"
-                    >
-                      Edit
-                    </Link>
+                    <div className="flex space-x-5">
+                      <Link
+                        to={`/edit/${cv.id}`}
+                        className="text-sm font-medium text-indigo-400 hover:underline"
+                      >
+                        Edit
+                      </Link>
+                      <button
+                        onClick={() => handleDelete(cv.id)}
+                        className="text-sm font-medium text-red-500 hover:underline"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 </li>
               ))}
