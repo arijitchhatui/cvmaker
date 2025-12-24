@@ -42,7 +42,7 @@ export const useCVsStore = create<CVsStore>()(
         })),
     }),
     {
-      name: "cv-storage",
+      name: "cvs-storage",
     },
   ),
 );
