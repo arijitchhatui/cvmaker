@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useParams } from "react-router";
+import { toast } from "react-toastify";
 
 import { useCVsStore } from "../stores/cVsStore";
 import type { CV } from "../types";
 
 export default function EditCVPage() {
   const { id } = useParams<{ id: string }>();
-  const { cvs, updateCV } = useCVsStore();
+  const { cvs, updateCV, deleteCV } = useCVsStore();
 
   const cvFinded = cvs.find((cv) => cv.id === id);
 
@@ -61,6 +62,18 @@ export default function EditCVPage() {
       references: cv.references,
       links: cv.links,
     });
+
+    toast.success("CV updated successfully.");
+  }
+
+  function handleDelete(cvFindedId: CV["id"]) {
+    if (confirm("Are you sure you want to delete this CV?")) {
+      deleteCV(cvFindedId);
+
+      toast.success("CV deleted successfully.");
+    } else {
+      toast.info("CV deletion cancelled.", { autoClose: 1000 });
+    }
   }
 
   if (!cvFinded) {
@@ -80,7 +93,17 @@ export default function EditCVPage() {
         </div>
 
         <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow">
-          <h1 className="mb-6 text-2xl font-semibold">Edit CV</h1>
+          <div>
+            <div className="flex items-center justify-between mb-6">
+              <h1 className="text-2xl font-semibold">Edit CV</h1>
+              <button
+                onClick={() => handleDelete(cvFinded.id)}
+                className="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-500 transition"
+              >
+                Delete CV
+              </button>
+            </div>
+          </div>
 
           <form
             onSubmit={(e) => handleSubmit(e, cvFinded.id)}

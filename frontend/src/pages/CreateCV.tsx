@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 import RepeatableSection from "../components/RepeatableSection";
 import { useCVsStore } from "../stores/cVsStore";
@@ -64,6 +65,8 @@ export default function CreateCVPage() {
       references: cV.references,
       links: cV.links,
     });
+
+    toast.success("CV created successfully.");
 
     navigate(`/edit/${id}`);
   }
