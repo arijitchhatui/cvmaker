@@ -414,6 +414,29 @@ export default function CreateCVPage() {
               <hr className="border-zinc-700" />
             </div>
 
+            <RepeatableSection<CV["skills"][number]>
+              title="Skills"
+              items={cV.skills}
+              onChange={(skills) => setCV({ ...cV, skills })}
+              emptyItem={{ name: "", level: null }}
+              fields={[
+                {
+                  name: "name",
+                  label: "Skill",
+                  type: "text",
+                  required: true,
+                  placeholder: "e.g. JavaScript",
+                },
+                {
+                  name: "level",
+                  label: "Proficiency Level",
+                  type: "text",
+                  required: false,
+                  placeholder: "e.g. Beginner, Intermediate, Expert",
+                },
+              ]}
+            />
+
             <button
               type="submit"
               className="w-full rounded-md bg-indigo-600 px-4 py-2 font-medium transition hover:bg-indigo-500"

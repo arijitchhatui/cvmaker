@@ -32,7 +32,10 @@ export interface CV {
     responsibilities: string | null;
     location: string | null;
   }>;
-  skills: string[];
+  skills: Array<{
+    name: string;
+    level: string | null;
+  }>;
   projects: Array<{
     name: string;
     description: string;

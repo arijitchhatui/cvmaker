@@ -61,7 +61,7 @@ export default function RepeatableSection<T extends Record<string, unknown>>({
       {items.map((item, index) => (
         <div
           key={index}
-          className="rounded-lg border border-zinc-800 bg-zinc-950 p-4 space-y-4"
+          className="rounded-lg mt-6 border border-zinc-800 bg-zinc-950 p-4 space-y-4"
         >
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium text-zinc-300">
