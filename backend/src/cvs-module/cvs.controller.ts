@@ -2,27 +2,27 @@ import { Body, Controller, Post, Res } from "@nestjs/common";
 import type { Response } from "express";
 
 import { CvsService } from "./cvs.service";
-import { CreateCvDto } from "./dto/create-cv.dto";
+import { CreateCVDto } from "./dto/create-cv.dto";
 
 @Controller("cvs")
 export class CvsController {
   constructor(private readonly cvsService: CvsService) {}
 
   @Post("preview")
-  createCVPreview(@Body() createCvDto: CreateCvDto): string {
-    return this.cvsService.createCVPreview(createCvDto);
+  createCVPreview(@Body() createCVDto: CreateCVDto): string {
+    return this.cvsService.createCVPreview(createCVDto);
   }
 
   @Post("pdf")
   async createCVPdf(
-    @Body() createCvDto: CreateCvDto,
+    @Body() createCVDto: CreateCVDto,
     @Res() res: Response,
   ): Promise<void> {
-    const pdfBuffer = await this.cvsService.createCVPdf(createCvDto);
+    const pdfBuffer = await this.cvsService.createCVPdf(createCVDto);
 
     res.set({
       "Content-Type": "application/pdf",
-      "Content-Disposition": `attachment; filename=${createCvDto.cVName}.pdf`,
+      "Content-Disposition": `attachment; filename=${createCVDto.cVName}.pdf`,
       "Content-Length": pdfBuffer.length,
     });
 

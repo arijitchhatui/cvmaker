@@ -9,7 +9,7 @@ import {
   ValidateNested,
 } from "class-validator";
 
-class CreateCvContactsDto {
+class CreateCVContactsDto {
   @ApiProperty({
     type: String,
     nullable: true,
@@ -29,7 +29,7 @@ class CreateCvContactsDto {
   public phone: string | null;
 }
 
-export class CreateCvDto {
+export class CreateCVDto {
   @ApiProperty()
   @IsString()
   public templateId: string;
@@ -79,9 +79,9 @@ export class CreateCvDto {
 
   @ApiProperty()
   @ValidateNested()
-  @Type(() => CreateCvContactsDto)
+  @Type(() => CreateCVContactsDto)
   @IsObject()
-  public contacts: CreateCvContactsDto;
+  public contacts: CreateCVContactsDto;
 
   @ApiProperty({
     type: String,
