@@ -30,6 +30,21 @@ export default function HomePage() {
           saved.
         </div>
 
+        {/** Go to preview page */}
+        <div className="rounded-lg border border-yellow-500/40 bg-yellow-500/10 px-4 py-3 text-sm font-medium text-yellow-300">
+          New: You can now preview your CVs before downloading them! Click on
+          the "See Preview's" button.
+        </div>
+
+        <div className="text-center">
+          <Link
+            to="/preview"
+            className="rounded-md bg-yellow-500 px-4 py-2 text-sm font-medium text-yellow-900 transition hover:bg-yellow-400"
+          >
+            See Preview's
+          </Link>
+        </div>
+
         <div className="space-y-6 rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-semibold">Your CVs</h1>
