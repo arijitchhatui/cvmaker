@@ -13,6 +13,7 @@ export default function PreviewPage() {
     useState<TemplateIds | null>(null);
 
   const [isLoading, setIsLoading] = useState(false);
+  const [downloadProgress, setDownloadProgress] = useState<number>(0);
 
   const { cVs } = useCVsStore();
 
@@ -44,6 +45,7 @@ export default function PreviewPage() {
     }
 
     setIsLoading(true);
+    setDownloadProgress(0);
 
     try {
       const response = await apiInstance.post<Blob>(
@@ -54,6 +56,15 @@ export default function PreviewPage() {
         },
         {
           responseType: "blob",
+          onDownloadProgress: (progressEvent) => {
+            if (!progressEvent.total) return;
+
+            const percent = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total,
+            );
+
+            setDownloadProgress(percent);
+          },
         },
       );
 
@@ -76,12 +87,29 @@ export default function PreviewPage() {
       toast.error("Failed to generate CV PDF. Please try again.");
     } finally {
       setIsLoading(false);
+      setDownloadProgress(0);
     }
   }
 
   return (
     <main className="flex min-h-screen flex-col items-center bg-zinc-950 px-6 py-10 text-zinc-100">
       <title>Preview - CV Maker</title>
+
+      {isLoading && downloadProgress > 0 && (
+        <div className="z-50 mt-2 w-full">
+          <div className="mb-1 flex justify-between text-xs text-zinc-400">
+            <span>Downloading PDF</span>
+            <span>{downloadProgress}%</span>
+          </div>
+
+          <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-800">
+            <div
+              className="h-full bg-indigo-500 transition-all duration-150"
+              style={{ width: `${downloadProgress}%` }}
+            />
+          </div>
+        </div>
+      )}
 
       <h1 className="text-3xl font-semibold">Preview Page</h1>
 
