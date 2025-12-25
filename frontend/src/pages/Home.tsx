@@ -5,11 +5,11 @@ import { useCVsStore } from "../stores/cVsStore";
 import type { CV } from "../types";
 
 export default function HomePage() {
-  const { cvs, deleteCV } = useCVsStore();
+  const { cVs, deleteCV } = useCVsStore();
 
-  function handleDelete(cvId: CV["id"]) {
+  function handleDelete(cVId: CV["id"]) {
     if (confirm("Are you sure you want to delete this CV?")) {
-      deleteCV(cvId);
+      deleteCV(cVId);
 
       toast.success("CV deleted successfully.");
     } else {
@@ -25,7 +25,7 @@ export default function HomePage() {
         <div className="rounded-lg border border-indigo-500/40 bg-indigo-500/10 px-4 py-3 text-sm font-medium text-indigo-300">
           Welcome back. You have{" "}
           <strong>
-            {cvs.length} CV{cvs.length !== 1 ? "s" : ""}
+            {cVs.length} CV{cVs.length !== 1 ? "s" : ""}
           </strong>{" "}
           saved.
         </div>
@@ -42,37 +42,37 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {cvs.length > 0 ? (
+          {cVs.length > 0 ? (
             <ul className="space-y-3">
-              {cvs.map((cv) => (
+              {cVs.map((cV) => (
                 <li
-                  key={cv.id}
+                  key={cV.id}
                   className="rounded-lg border border-zinc-800 bg-zinc-950 px-4 py-3"
                 >
                   <div className="flex items-center justify-between">
                     <div>
                       <h2 className="font-medium text-zinc-100">
-                        Name: {cv.cVName}
+                        Name: {cV.cVName}
                       </h2>
                       <p className="text-sm text-zinc-400">
                         Created At:{" "}
-                        {new Date(cv.createdAt).toLocaleDateString()}
+                        {new Date(cV.createdAt).toLocaleDateString()}
                       </p>
                       <p className="text-sm text-zinc-400">
                         Updated At:{" "}
-                        {new Date(cv.updatedAt).toLocaleDateString()}
+                        {new Date(cV.updatedAt).toLocaleDateString()}
                       </p>
                     </div>
 
                     <div className="flex space-x-5">
                       <Link
-                        to={`/edit/${cv.id}`}
+                        to={`/edit/${cV.id}`}
                         className="text-sm font-medium text-indigo-400 hover:underline"
                       >
                         Edit
                       </Link>
                       <button
-                        onClick={() => handleDelete(cv.id)}
+                        onClick={() => handleDelete(cV.id)}
                         className="text-sm font-medium text-red-500 hover:underline"
                       >
                         Delete

@@ -9,11 +9,11 @@ import NotFoundPage from "./NotFound";
 
 export default function EditCVPage() {
   const { id } = useParams<{ id: string }>();
-  const { cvs, updateCV, deleteCV } = useCVsStore();
+  const { cVs, updateCV, deleteCV } = useCVsStore();
 
   const navigate = useNavigate();
 
-  const cVFinded = cvs.find((cv) => cv.id === id);
+  const cVFinded = cVs.find((cV) => cV.id === id);
 
   const [cV, setCV] = useState<CV>({
     id: cVFinded?.id || "",

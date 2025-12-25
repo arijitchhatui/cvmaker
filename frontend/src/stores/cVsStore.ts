@@ -4,10 +4,10 @@ import { persist } from "zustand/middleware";
 import type { CV } from "../types";
 
 interface CVsStore {
-  cvs: CV[];
-  activeCvId: string | null;
+  cVs: CV[];
+  activeCVId: string | null;
 
-  createCV: (cv: CV) => void;
+  createCV: (cV: CV) => void;
   updateCV: (id: string, data: Partial<CV>) => void;
   deleteCV: (id: string) => void;
   setActiveCV: (id: string) => void;
@@ -16,29 +16,29 @@ interface CVsStore {
 export const useCVsStore = create<CVsStore>()(
   persist(
     (set) => ({
-      cvs: [],
-      activeCvId: null,
+      cVs: [],
+      activeCVId: null,
 
-      createCV: (cv) =>
+      createCV: (cV) =>
         set((state) => ({
-          cvs: [...state.cvs, cv],
-          activeCvId: cv.id,
+          cVs: [...state.cVs, cV],
+          activeCVId: cV.id,
         })),
 
       updateCV: (id, data) =>
         set((state) => ({
-          cvs: state.cvs.map((cv) => (cv.id === id ? { ...cv, ...data } : cv)),
+          cVs: state.cVs.map((cV) => (cV.id === id ? { ...cV, ...data } : cV)),
         })),
 
       deleteCV: (id) =>
         set((state) => ({
-          cvs: state.cvs.filter((cv) => cv.id !== id),
-          activeCvId: state.activeCvId === id ? null : state.activeCvId,
+          cVs: state.cVs.filter((cV) => cV.id !== id),
+          activeCVId: state.activeCVId === id ? null : state.activeCVId,
         })),
 
       setActiveCV: (id) =>
         set(() => ({
-          activeCvId: id,
+          activeCVId: id,
         })),
     }),
     {
