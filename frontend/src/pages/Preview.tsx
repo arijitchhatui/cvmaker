@@ -9,10 +9,18 @@ export default function PreviewPage() {
 
   const [selectedCV, setSelectedCV] = useState<CV | null>(null);
 
+  const [isPreviewLoading, setIsPreviewLoading] = useState(false);
+  const [isPdfLoading, setIsPdfLoading] = useState(false);
+
+  const isAnyLoading = isPreviewLoading || isPdfLoading;
+
   const { cVs } = useCVsStore();
 
   async function handleSubmitPreview() {
     if (!selectedCV) return;
+
+    setIsPreviewLoading(true);
+    setHtml("");
 
     try {
       const response = await apiInstance.post("/cvs/preview", {
@@ -23,11 +31,15 @@ export default function PreviewPage() {
       setHtml(response.data);
     } catch (error) {
       console.error("Error generating CV preview:", error);
+    } finally {
+      setIsPreviewLoading(false);
     }
   }
 
   async function handleSubmitPdf() {
     if (!selectedCV) return;
+
+    setIsPdfLoading(true);
 
     try {
       const response = await apiInstance.post<Blob>(
@@ -56,14 +68,18 @@ export default function PreviewPage() {
       link.remove();
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      console.error("Error generating CV preview:", error);
+      console.error("Error generating CV pdf:", error);
+    } finally {
+      setIsPdfLoading(false);
     }
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-zinc-950 px-6 py-10 text-zinc-100">
+    <main className="flex min-h-screen flex-col items-center bg-zinc-950 px-6 py-10 text-zinc-100">
       <title>Preview - CV Maker</title>
+
       <h1 className="text-3xl font-semibold">Preview Page</h1>
+
       <div className="mt-6 flex w-full max-w-md flex-col gap-4">
         <select
           className="w-full rounded-md border border-zinc-700 bg-zinc-900 px-4 py-2 text-zinc-100 focus:border-indigo-500 focus:outline-none"
@@ -82,28 +98,44 @@ export default function PreviewPage() {
             </option>
           ))}
         </select>
+
         <button
           className="w-full rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-500 disabled:opacity-50"
           onClick={handleSubmitPreview}
-          disabled={!selectedCV}
+          disabled={!selectedCV || isAnyLoading}
         >
-          Preview CV
+          {isPreviewLoading ? "Generating preview..." : "Preview CV"}
         </button>
 
         <button
           className="w-full rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-500 disabled:opacity-50"
           onClick={handleSubmitPdf}
-          disabled={!selectedCV}
+          disabled={!selectedCV || isAnyLoading}
         >
-          Download PDF
+          {isPdfLoading ? "Generating PDF..." : "Download PDF"}
         </button>
       </div>
 
-      <iframe
-        title="CV Preview"
-        srcDoc={html}
-        className="mt-6 h-[80vh] w-full rounded-lg border border-zinc-800 bg-white p-4 shadow-lg sm:max-w-4/5"
-      ></iframe>
+      <div className="relative mt-6 h-[80vh] w-full sm:max-w-4/5">
+        {(isPreviewLoading || !html) && (
+          <div className="absolute inset-0 z-10 flex items-center justify-center rounded-lg bg-zinc-900/80">
+            <div className="flex flex-col items-center gap-3">
+              <div className="h-10 w-10 animate-spin rounded-full border-4 border-indigo-500 border-t-transparent" />
+              <span className="text-sm text-zinc-300">
+                {isPreviewLoading
+                  ? "Generating preview..."
+                  : "Preview will appear here"}
+              </span>
+            </div>
+          </div>
+        )}
+
+        <iframe
+          title="CV Preview"
+          srcDoc={html}
+          className="h-full w-full rounded-lg border border-zinc-800 bg-white shadow-lg"
+        />
+      </div>
     </main>
   );
 }
