@@ -37,7 +37,7 @@ async function bootstrap(): Promise<void> {
 
   swaggerInitializer(app);
 
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
 
   await app.listen(port);
 

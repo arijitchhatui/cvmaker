@@ -29,6 +29,285 @@ class CreateCVContactsDto {
   public phone: string | null;
 }
 
+class CreateCVEducationDto {
+  @ApiProperty()
+  @IsString()
+  public institution: string;
+
+  @ApiProperty()
+  @IsString()
+  public degree: string;
+
+  @ApiProperty()
+  @IsString()
+  public fieldOfStudy: string;
+
+  @ApiProperty()
+  @IsString()
+  public startDate: string;
+
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  public endDate: string | null;
+
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  public grade: string | null;
+
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  public description: string | null;
+
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  public location: string | null;
+}
+
+class CreateCVExperienceDto {
+  @ApiProperty()
+  @IsString()
+  public company: string;
+
+  @ApiProperty()
+  @IsString()
+  public position: string;
+
+  @ApiProperty()
+  @IsString()
+  public startDate: string;
+
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  public endDate: string | null;
+
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  public responsibilities: string | null;
+
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  public location: string | null;
+}
+
+class CreateCVSkillDto {
+  @ApiProperty()
+  @IsString()
+  public name: string;
+
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  public level: string | null;
+}
+
+class CreateCVProjectDto {
+  @ApiProperty()
+  @IsString()
+  public name: string;
+
+  @ApiProperty()
+  @IsString()
+  public description: string;
+
+  @ApiProperty()
+  @IsString()
+  public startDate: string;
+
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  public endDate: string | null;
+
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  public link: string | null;
+
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  public location: string | null;
+}
+
+class CreateCVCertificationDto {
+  @ApiProperty()
+  @IsString()
+  public name: string;
+
+  @ApiProperty()
+  @IsString()
+  public issuingOrganization: string;
+
+  @ApiProperty()
+  @IsString()
+  public issueDate: string;
+
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  public expirationDate: string | null;
+
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  public credentialID: string | null;
+
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  public credentialURL: string | null;
+}
+
+class CreateCVLanguageDto {
+  @ApiProperty()
+  @IsString()
+  public name: string;
+
+  @ApiProperty()
+  @IsString()
+  public proficiency: string;
+}
+
+class CreateCVHobbyDto {
+  @ApiProperty()
+  @IsString()
+  public description: string;
+}
+
+class CreateCVOtherExperienceDto {
+  @ApiProperty()
+  @IsString()
+  public title: string;
+
+  @ApiProperty()
+  @IsString()
+  public description: string;
+
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  public startDate: string | null;
+
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  public endDate: string | null;
+
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  public location: string | null;
+}
+
+class CreateCVReferenceDto {
+  @ApiProperty()
+  @IsString()
+  public name: string;
+
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  public relationship: string | null;
+
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  public contactInfo: string | null;
+}
+
+class CreateCVLinkDto {
+  @ApiProperty()
+  @IsString()
+  public label: string;
+
+  @ApiProperty()
+  @IsString()
+  public url: string;
+}
+
 export class CreateCVDto {
   @ApiProperty()
   @IsString()
@@ -110,59 +389,68 @@ export class CreateCVDto {
   @IsOptional()
   public objectives: string | null;
 
-  @ApiProperty({ type: [Object] })
+  @ApiProperty({
+    type: CreateCVEducationDto,
+    isArray: true,
+  })
   @IsArray()
-  public education: Array<{
-    institution: string;
-    degree: string;
-    fieldOfStudy: string;
-    startDate: string;
-    endDate: string | null;
-    grade: string | null;
-    description: string | null;
-    location: string | null;
-  }>;
+  @ValidateNested()
+  @Type(() => CreateCVEducationDto)
+  public education: CreateCVEducationDto[];
 
-  public experience: Array<{
-    company: string;
-    position: string;
-    startDate: string;
-    endDate: string | null;
-    responsibilities: string | null;
-    location: string | null;
-  }>;
+  @ApiProperty({
+    type: CreateCVExperienceDto,
+    isArray: true,
+  })
+  @IsArray()
+  @ValidateNested()
+  @Type(() => CreateCVExperienceDto)
+  public experience: CreateCVExperienceDto[];
 
-  public skills: Array<{
-    name: string;
-    level: string | null;
-  }>;
+  @ApiProperty({
+    type: CreateCVSkillDto,
+    isArray: true,
+  })
+  @IsArray()
+  @ValidateNested()
+  @Type(() => CreateCVSkillDto)
+  public skills: CreateCVSkillDto[];
 
-  public projects: Array<{
-    name: string;
-    description: string;
-    startDate: string;
-    endDate: string | null;
-    link: string | null;
-    location: string | null;
-  }>;
+  @ApiProperty({
+    type: CreateCVProjectDto,
+    isArray: true,
+  })
+  @IsArray()
+  @ValidateNested()
+  @Type(() => CreateCVProjectDto)
+  public projects: CreateCVProjectDto[];
 
-  public certifications: Array<{
-    name: string;
-    issuingOrganization: string;
-    issueDate: string;
-    expirationDate: string | null;
-    credentialID: string | null;
-    credentialURL: string | null;
-  }>;
+  @ApiProperty({
+    type: CreateCVCertificationDto,
+    isArray: true,
+  })
+  @IsArray()
+  @ValidateNested()
+  @Type(() => CreateCVCertificationDto)
+  public certifications: CreateCVCertificationDto[];
 
-  public languages: Array<{
-    name: string;
-    proficiency: string;
-  }>;
+  @ApiProperty({
+    type: CreateCVLanguageDto,
+    isArray: true,
+  })
+  @IsArray()
+  @ValidateNested()
+  @Type(() => CreateCVLanguageDto)
+  public languages: CreateCVLanguageDto[];
 
-  public hobbies: Array<{
-    description: string;
-  }>;
+  @ApiProperty({
+    type: CreateCVHobbyDto,
+    isArray: true,
+  })
+  @IsArray()
+  @ValidateNested()
+  @Type(() => CreateCVHobbyDto)
+  public hobbies: CreateCVHobbyDto[];
 
   @ApiProperty({
     type: String,
@@ -173,24 +461,32 @@ export class CreateCVDto {
   @IsOptional()
   public additionalInfo: string | null;
 
-  public otherExperiences: Array<{
-    title: string;
-    description: string;
-    startDate: string | null;
-    endDate: string | null;
-    location: string | null;
-  }>;
+  @ApiProperty({
+    type: CreateCVOtherExperienceDto,
+    isArray: true,
+  })
+  @IsArray()
+  @ValidateNested()
+  @Type(() => CreateCVOtherExperienceDto)
+  public otherExperiences: CreateCVOtherExperienceDto[];
 
-  public references: Array<{
-    name: string;
-    relationship: string | null;
-    contactInfo: string | null;
-  }>;
+  @ApiProperty({
+    type: CreateCVReferenceDto,
+    isArray: true,
+  })
+  @IsArray()
+  @ValidateNested()
+  @Type(() => CreateCVReferenceDto)
+  public references: CreateCVReferenceDto[];
 
-  public links: Array<{
-    label: string;
-    url: string;
-  }>;
+  @ApiProperty({
+    type: CreateCVLinkDto,
+    isArray: true,
+  })
+  @IsArray()
+  @ValidateNested()
+  @Type(() => CreateCVLinkDto)
+  public links: CreateCVLinkDto[];
 
   @ApiProperty({
     example: Date.now(),
