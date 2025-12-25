@@ -27,5 +27,7 @@ export class CvsController {
     });
 
     res.end(pdfBuffer);
+
+    return void 0;
   }
 }

@@ -1,13 +1,13 @@
 import { Injectable } from "@nestjs/common";
 import puppeteer from "puppeteer";
-import { cvExample1Template } from "src/templates/examples/example1";
+import cvTemplates from "src/templates";
 
 import { CreateCVDto } from "./dto/create-cv.dto";
 
 @Injectable()
 export class CvsService {
   createCVPreview(createCVDto: CreateCVDto): string {
-    const htmlPreview = cvExample1Template(createCVDto);
+    const htmlPreview = cvTemplates(createCVDto);
 
     return htmlPreview;
   }
@@ -15,7 +15,7 @@ export class CvsService {
   async createCVPdf(
     createCVDto: CreateCVDto,
   ): Promise<Uint8Array<ArrayBufferLike>> {
-    const html = cvExample1Template(createCVDto);
+    const html = cvTemplates(createCVDto);
 
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
