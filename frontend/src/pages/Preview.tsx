@@ -29,6 +29,8 @@ export default function PreviewPage() {
   async function handleSubmitPdf() {
     if (!selectedCV) return;
 
+    console.log(html);
+
     try {
       const response = await apiInstance.post("/cvs/pdf", {
         templateId: selectedCV.id,
