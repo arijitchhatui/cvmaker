@@ -30,19 +30,31 @@ export default function PreviewPage() {
     if (!selectedCV) return;
 
     try {
-      const response = await apiInstance.post("/cvs/pdf", {
-        templateId: selectedCV.id,
-        ...selectedCV,
+      const response = await apiInstance.post<Blob>(
+        "/cvs/pdf",
+        {
+          templateId: selectedCV.id,
+          ...selectedCV,
+        },
+        {
+          responseType: "blob",
+        },
+      );
+
+      const blob = new Blob([response.data], {
+        type: "application/pdf",
       });
 
-      // Create a blob from the PDF buffer
-      const pdfBlob = new Blob([response.data], { type: "application/pdf" });
+      const url = window.URL.createObjectURL(blob);
 
-      // Create a link to download the PDF
       const link = document.createElement("a");
-      link.href = window.URL.createObjectURL(pdfBlob);
+      link.href = url;
       link.download = `${selectedCV.cVName || "cv"}.pdf`;
+      document.body.appendChild(link);
       link.click();
+
+      link.remove();
+      window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error("Error generating CV preview:", error);
     }
