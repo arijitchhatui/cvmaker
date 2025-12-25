@@ -12,10 +12,12 @@ export class CreateCvDto {
   public lastName: string;
   public nickname: string | null;
   public avatar: string | null;
+
   public contacts: {
     email: string | null;
     phone: string | null;
   };
+
   public address: string | null;
   public summary: string | null;
   public objectives: string | null;

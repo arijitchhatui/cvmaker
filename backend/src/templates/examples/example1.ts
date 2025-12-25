@@ -1,217 +1,152 @@
-export function cvExample1Template(): string {
+import type { CreateCvDto } from "src/cvs-module/dto/create-cv.dto";
+
+export function cvExample1Template(dto: CreateCvDto): string {
+  const fullName = [dto.firstName, dto.middleName, dto.lastName]
+    .filter(Boolean)
+    .join(" ");
+
   return `<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Currículo - João Silva</title>
+  <title>Currículo - ${fullName}</title>
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-      background: #f4f6f8;
-      padding: 40px;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: auto;
-      background: #ffffff;
-      padding: 40px;
-      border-radius: 8px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid #eaeaea;
-      padding-bottom: 20px;
-      margin-bottom: 30px;
-    }
-
-    header h1 {
-      font-size: 32px;
-      color: #2c3e50;
-    }
-
-    header h2 {
-      font-size: 18px;
-      font-weight: normal;
-      color: #7f8c8d;
-      margin-top: 4px;
-    }
-
-    .contact {
-      text-align: right;
-      font-size: 14px;
-      color: #555;
-    }
-
-    .contact p {
-      margin-bottom: 4px;
-    }
-
-    section {
-      margin-bottom: 30px;
-    }
-
-    section h3 {
-      font-size: 20px;
-      color: #34495e;
-      margin-bottom: 12px;
-      border-left: 4px solid #3498db;
-      padding-left: 10px;
-    }
-
-    .about {
-      font-size: 15px;
-      line-height: 1.6;
-      color: #444;
-    }
-
-    .experience,
-    .education {
-      margin-bottom: 15px;
-    }
-
-    .item-title {
-      font-weight: bold;
-      font-size: 16px;
-      color: #2c3e50;
-    }
-
-    .item-subtitle {
-      font-size: 14px;
-      color: #7f8c8d;
-      margin-bottom: 6px;
-    }
-
-    .item-description {
-      font-size: 14px;
-      color: #444;
-      line-height: 1.5;
-    }
-
-    ul.skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      list-style: none;
-    }
-
-    ul.skills li {
-      background: #3498db;
-      color: white;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 13px;
-    }
-
-    footer {
-      text-align: center;
-      font-size: 12px;
-      color: #999;
-      margin-top: 40px;
-    }
-
-    @media print {
-      body {
-        background: none;
-        padding: 0;
-      }
-
-      .container {
-        box-shadow: none;
-        border-radius: 0;
-      }
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Segoe UI, sans-serif; }
+    body { background: #f4f6f8; padding: 40px; }
+    .container { max-width: 800px; margin: auto; background: #fff; padding: 40px; }
+    header { display: flex; justify-content: space-between; border-bottom: 2px solid #eee; padding-bottom: 20px; }
+    h1 { font-size: 32px; }
+    h2 { font-size: 18px; color: #777; }
+    section { margin-top: 30px; }
+    section h3 { border-left: 4px solid #3498db; padding-left: 10px; margin-bottom: 10px; }
+    .item-title { font-weight: bold; }
+    .item-subtitle { color: #777; font-size: 14px; }
+    ul.skills { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
+    ul.skills li { background: #3498db; color: #fff; padding: 6px 12px; border-radius: 20px; }
   </style>
 </head>
 
 <body>
   <div class="container">
 
+    <!-- HEADER -->
     <header>
       <div>
-        <h1>João Silva</h1>
-        <h2>Desenvolvedor Full Stack</h2>
+        <h1>${fullName}</h1>
       </div>
 
-      <div class="contact">
-        <p>📧 joao@email.com</p>
-        <p>📱 (11) 99999-9999</p>
-        <p>🌐 github.com/joaosilva</p>
-        <p>📍 São Paulo - SP</p>
+      <div>
+        ${dto.contacts?.email ? `<p>📧 ${dto.contacts.email}</p>` : ""}
+        ${dto.contacts?.phone ? `<p>📱 ${dto.contacts.phone}</p>` : ""}
+        ${dto.address ? `<p>📍 ${dto.address}</p>` : ""}
       </div>
     </header>
 
+    <!-- PERFIL -->
+    ${
+      dto.summary
+        ? `
     <section>
       <h3>Perfil Profissional</h3>
-      <p class="about">
-        Desenvolvedor Full Stack com experiência em criação de aplicações web modernas,
-        APIs REST e sistemas escaláveis. Focado em performance, código limpo e boas práticas.
-      </p>
-    </section>
+      <p>${dto.summary}</p>
+    </section>`
+        : ""
+    }
 
+    <!-- EXPERIÊNCIA -->
+    ${
+      dto.experience?.length
+        ? `
     <section>
       <h3>Experiência Profissional</h3>
+      ${dto.experience
+        .map(
+          (exp) => `
+        <div>
+          <p class="item-title">${exp.position}</p>
+          <p class="item-subtitle">
+            ${exp.company} • ${exp.startDate} - ${exp.endDate || "Atual"}
+          </p>
+          ${exp.responsibilities ? `<p>${exp.responsibilities}</p>` : ""}
+        </div>
+      `,
+        )
+        .join("")}
+    </section>`
+        : ""
+    }
 
-      <div class="experience">
-        <p class="item-title">Desenvolvedor Full Stack</p>
-        <p class="item-subtitle">Empresa XYZ • 2022 - Atual</p>
-        <p class="item-description">
-          Desenvolvimento de aplicações em React e Node.js, integração com APIs,
-          banco de dados SQL/NoSQL e implementação de autenticação e segurança.
-        </p>
-      </div>
-
-      <div class="experience">
-        <p class="item-title">Desenvolvedor Front-end</p>
-        <p class="item-subtitle">Empresa ABC • 2020 - 2022</p>
-        <p class="item-description">
-          Criação de interfaces responsivas, otimização de performance
-          e colaboração com designers e back-end.
-        </p>
-      </div>
-    </section>
-
+    <!-- EDUCAÇÃO -->
+    ${
+      dto.education?.length
+        ? `
     <section>
       <h3>Formação Acadêmica</h3>
+      ${dto.education
+        .map(
+          (edu) => `
+        <div>
+          <p class="item-title">${edu.degree} - ${edu.fieldOfStudy}</p>
+          <p class="item-subtitle">
+            ${edu.institution} • ${edu.startDate} - ${edu.endDate || "Atual"}
+          </p>
+          ${edu.description ? `<p>${edu.description}</p>` : ""}
+        </div>
+      `,
+        )
+        .join("")}
+    </section>`
+        : ""
+    }
 
-      <div class="education">
-        <p class="item-title">Bacharel em Ciência da Computação</p>
-        <p class="item-subtitle">Universidade Exemplo • 2016 - 2020</p>
-      </div>
-    </section>
-
+    <!-- SKILLS -->
+    ${
+      dto.skills?.length
+        ? `
     <section>
-      <h3>Habilidades Técnicas</h3>
+      <h3>Habilidades</h3>
       <ul class="skills">
-        <li>JavaScript</li>
-        <li>TypeScript</li>
-        <li>React</li>
-        <li>Node.js</li>
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>SQL</li>
-        <li>Git</li>
-        <li>Docker</li>
+        ${dto.skills
+          .map(
+            (skill) => `
+          <li>${skill.name}${skill.level ? ` (${skill.level})` : ""}</li>
+        `,
+          )
+          .join("")}
       </ul>
-    </section>
+    </section>`
+        : ""
+    }
 
-    <footer>
-      Currículo gerado automaticamente via Node.js
+    <!-- PROJETOS -->
+    ${
+      dto.projects?.length
+        ? `
+    <section>
+      <h3>Projetos</h3>
+      ${dto.projects
+        .map(
+          (p) => `
+        <div>
+          <p class="item-title">${p.name}</p>
+          <p class="item-subtitle">${p.startDate} - ${p.endDate || "Atual"}</p>
+          <p>${p.description}</p>
+          ${p.link ? `<p>🔗 ${p.link}</p>` : ""}
+        </div>
+      `,
+        )
+        .join("")}
+    </section>`
+        : ""
+    }
+
+    <!-- FOOTER -->
+    <footer style="margin-top:40px;text-align:center;font-size:12px;color:#999;">
+      Currículo gerado automaticamente
     </footer>
 
   </div>
 </body>
-</html>
-`;
+</html>`;
 }

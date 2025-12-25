@@ -7,9 +7,7 @@ import { CreateCvDto } from "./dto/create-cv.dto";
 @Injectable()
 export class CvsService {
   createCVPreview(createCvDto: CreateCvDto): string {
-    createCvDto.additionalInfo = "";
-
-    const htmlPreview = cvExample1Template();
+    const htmlPreview = cvExample1Template(createCvDto);
 
     return htmlPreview;
   }
@@ -17,9 +15,7 @@ export class CvsService {
   async createCVPdf(
     createCvDto: CreateCvDto,
   ): Promise<Uint8Array<ArrayBufferLike>> {
-    createCvDto.additionalInfo = "";
-
-    const html = cvExample1Template();
+    const html = cvExample1Template(createCvDto);
 
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
