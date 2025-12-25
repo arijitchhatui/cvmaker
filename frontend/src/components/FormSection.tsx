@@ -132,7 +132,7 @@ export default function FormSection({
           onChange={(e) =>
             setCV({
               ...cV,
-              contacts: { ...cV.contacts, email: e.target.value },
+              contacts: { ...cV.contacts, email: e.target.value || null },
             })
           }
           placeholder="e.g. foo@bar.com"
@@ -150,7 +150,7 @@ export default function FormSection({
           onChange={(e) =>
             setCV({
               ...cV,
-              contacts: { ...cV.contacts, phone: e.target.value },
+              contacts: { ...cV.contacts, phone: e.target.value || null },
             })
           }
           placeholder="e.g. +1 234 567 890"
@@ -162,7 +162,7 @@ export default function FormSection({
         <label className="mb-1 block text-sm text-zinc-400">Address</label>
         <input
           value={cV.address || ""}
-          onChange={(e) => setCV({ ...cV, address: e.target.value })}
+          onChange={(e) => setCV({ ...cV, address: e.target.value || null })}
           placeholder="e.g. 123 Main St, City, Country"
           className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2"
         />
@@ -172,7 +172,7 @@ export default function FormSection({
         <label className="mb-1 block text-sm text-zinc-400">Summary</label>
         <textarea
           value={cV.summary || ""}
-          onChange={(e) => setCV({ ...cV, summary: e.target.value })}
+          onChange={(e) => setCV({ ...cV, summary: e.target.value || null })}
           placeholder="A brief summary about yourself"
           className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2"
         />
@@ -182,7 +182,7 @@ export default function FormSection({
         <label className="mb-1 block text-sm text-zinc-400">Objectives</label>
         <textarea
           value={cV.objectives || ""}
-          onChange={(e) => setCV({ ...cV, objectives: e.target.value })}
+          onChange={(e) => setCV({ ...cV, objectives: e.target.value || null })}
           placeholder="Your career objectives"
           className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2"
         />
