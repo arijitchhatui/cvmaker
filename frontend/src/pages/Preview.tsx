@@ -33,6 +33,7 @@ export default function PreviewPage() {
       setHtml(response.data);
     } catch (error) {
       console.error("Error generating CV preview:", error);
+      toast.error("Failed to generate CV preview. Please try again.");
     } finally {
       setIsPreviewLoading(false);
     }
@@ -73,6 +74,7 @@ export default function PreviewPage() {
       window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error("Error generating CV pdf:", error);
+      toast.error("Failed to generate CV PDF. Please try again.");
     } finally {
       setIsPdfLoading(false);
     }
