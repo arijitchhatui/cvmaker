@@ -17,7 +17,10 @@ export default function PreviewPage() {
 
   const { cVs } = useCVsStore();
 
-  async function handleSubmitPreview(selectedCV: CV | null) {
+  async function handleSubmitPreview(
+    selectedCV: CV | null,
+    selectedTemplateId: TemplateIds | null,
+  ) {
     if (!selectedCV || !selectedTemplateId) return;
 
     setIsLoading(true);
@@ -121,7 +124,7 @@ export default function PreviewPage() {
             const cv = cVs.find((cv) => cv.id === e.target.value) || null;
             setSelectedCV(cv);
 
-            handleSubmitPreview(cv);
+            handleSubmitPreview(cv, selectedTemplateId);
           }}
         >
           <option value="" disabled>
@@ -141,7 +144,7 @@ export default function PreviewPage() {
             const templateId = e.target.value as TemplateIds;
             setSelectedTemplateId(templateId);
 
-            handleSubmitPreview(selectedCV);
+            handleSubmitPreview(selectedCV, templateId);
           }}
         >
           <option value="" disabled>
