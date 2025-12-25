@@ -7,17 +7,17 @@ import type { CV } from "../types";
 export default function PreviewPage() {
   const [html, setHtml] = useState<string>("");
 
-  const [selectedCVId, setSelectedCVId] = useState<CV | null>(null);
+  const [selectedCV, setSelectedCV] = useState<CV | null>(null);
 
   const { cVs } = useCVsStore();
 
   async function handleSubmitPreview() {
-    if (!selectedCVId) return;
+    if (!selectedCV) return;
 
     try {
       const response = await apiInstance.post("/cvs/preview", {
-        templateId: selectedCVId.id,
-        ...selectedCVId,
+        templateId: selectedCV.id,
+        ...selectedCV,
       });
 
       setHtml(response.data.html);
@@ -27,12 +27,12 @@ export default function PreviewPage() {
   }
 
   async function handleSubmitPdf() {
-    if (!selectedCVId) return;
+    if (!selectedCV) return;
 
     try {
       const response = await apiInstance.post("/cvs/pdf", {
-        templateId: selectedCVId.id,
-        ...selectedCVId,
+        templateId: selectedCV.id,
+        ...selectedCV,
       });
 
       setHtml(response.data.pdf);
@@ -48,10 +48,10 @@ export default function PreviewPage() {
       <div className="mt-6 flex w-full max-w-md flex-col gap-4">
         <select
           className="w-full rounded-md border border-zinc-700 bg-zinc-900 px-4 py-2 text-zinc-100 focus:border-indigo-500 focus:outline-none"
-          value={selectedCVId?.id || ""}
+          value={selectedCV?.id || ""}
           onChange={(e) => {
             const cv = cVs.find((cv) => cv.id === e.target.value) || null;
-            setSelectedCVId(cv);
+            setSelectedCV(cv);
           }}
         >
           <option value="" disabled>
@@ -66,7 +66,7 @@ export default function PreviewPage() {
         <button
           className="w-full rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-500 disabled:opacity-50"
           onClick={handleSubmitPreview}
-          disabled={!selectedCVId}
+          disabled={!selectedCV}
         >
           Preview CV
         </button>
@@ -74,7 +74,7 @@ export default function PreviewPage() {
         <button
           className="w-full rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-500 disabled:opacity-50"
           onClick={handleSubmitPdf}
-          disabled={!selectedCVId}
+          disabled={!selectedCV}
         >
           Download PDF
         </button>
