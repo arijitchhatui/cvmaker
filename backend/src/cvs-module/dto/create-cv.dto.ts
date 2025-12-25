@@ -1,13 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
-import {
-  IsArray,
-  IsNumber,
-  IsObject,
-  IsOptional,
-  IsString,
-  ValidateNested,
-} from "class-validator";
+import { IsArray, IsObject, IsOptional, ValidateNested } from "class-validator";
+import { IsNotBlankString } from "src/common/decorators/validation/IsNotBlankString";
+import { IsTimestamp } from "src/common/decorators/validation/IsTimestamp";
 
 class CreateCVContactsDto {
   @ApiProperty({
@@ -15,7 +10,7 @@ class CreateCVContactsDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public email: string | null;
 
@@ -24,26 +19,26 @@ class CreateCVContactsDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public phone: string | null;
 }
 
 class CreateCVEducationDto {
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public institution: string;
 
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public degree: string;
 
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public fieldOfStudy: string;
 
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public startDate: string;
 
   @ApiProperty({
@@ -51,7 +46,7 @@ class CreateCVEducationDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public endDate: string | null;
 
@@ -60,7 +55,7 @@ class CreateCVEducationDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public grade: string | null;
 
@@ -69,7 +64,7 @@ class CreateCVEducationDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public description: string | null;
 
@@ -78,22 +73,22 @@ class CreateCVEducationDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public location: string | null;
 }
 
 class CreateCVExperienceDto {
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public company: string;
 
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public position: string;
 
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public startDate: string;
 
   @ApiProperty({
@@ -101,7 +96,7 @@ class CreateCVExperienceDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public endDate: string | null;
 
@@ -110,7 +105,7 @@ class CreateCVExperienceDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public responsibilities: string | null;
 
@@ -119,14 +114,14 @@ class CreateCVExperienceDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public location: string | null;
 }
 
 class CreateCVSkillDto {
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public name: string;
 
   @ApiProperty({
@@ -134,22 +129,22 @@ class CreateCVSkillDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public level: string | null;
 }
 
 class CreateCVProjectDto {
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public name: string;
 
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public description: string;
 
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public startDate: string;
 
   @ApiProperty({
@@ -157,7 +152,7 @@ class CreateCVProjectDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public endDate: string | null;
 
@@ -166,7 +161,7 @@ class CreateCVProjectDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public link: string | null;
 
@@ -175,22 +170,22 @@ class CreateCVProjectDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public location: string | null;
 }
 
 class CreateCVCertificationDto {
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public name: string;
 
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public issuingOrganization: string;
 
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public issueDate: string;
 
   @ApiProperty({
@@ -198,7 +193,7 @@ class CreateCVCertificationDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public expirationDate: string | null;
 
@@ -207,7 +202,7 @@ class CreateCVCertificationDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public credentialID: string | null;
 
@@ -216,34 +211,34 @@ class CreateCVCertificationDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public credentialURL: string | null;
 }
 
 class CreateCVLanguageDto {
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public name: string;
 
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public proficiency: string;
 }
 
 class CreateCVHobbyDto {
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public description: string;
 }
 
 class CreateCVOtherExperienceDto {
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public title: string;
 
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public description: string;
 
   @ApiProperty({
@@ -251,7 +246,7 @@ class CreateCVOtherExperienceDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public startDate: string | null;
 
@@ -260,7 +255,7 @@ class CreateCVOtherExperienceDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public endDate: string | null;
 
@@ -269,14 +264,14 @@ class CreateCVOtherExperienceDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public location: string | null;
 }
 
 class CreateCVReferenceDto {
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public name: string;
 
   @ApiProperty({
@@ -284,7 +279,7 @@ class CreateCVReferenceDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public relationship: string | null;
 
@@ -293,36 +288,36 @@ class CreateCVReferenceDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public contactInfo: string | null;
 }
 
 class CreateCVLinkDto {
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public label: string;
 
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public url: string;
 }
 
 export class CreateCVDto {
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public templateId: string;
 
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public id: string;
 
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public cVName: string;
 
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public firstName: string;
 
   @ApiProperty({
@@ -330,12 +325,12 @@ export class CreateCVDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public middleName: string | null;
 
   @ApiProperty()
-  @IsString()
+  @IsNotBlankString()
   public lastName: string;
 
   @ApiProperty({
@@ -343,7 +338,7 @@ export class CreateCVDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public nickname: string | null;
 
@@ -352,7 +347,7 @@ export class CreateCVDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public avatar: string | null;
 
@@ -367,7 +362,7 @@ export class CreateCVDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public address: string | null;
 
@@ -376,7 +371,7 @@ export class CreateCVDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public summary: string | null;
 
@@ -385,7 +380,7 @@ export class CreateCVDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public objectives: string | null;
 
@@ -457,7 +452,7 @@ export class CreateCVDto {
     nullable: true,
     required: false,
   })
-  @IsString()
+  @IsNotBlankString()
   @IsOptional()
   public additionalInfo: string | null;
 
@@ -491,12 +486,12 @@ export class CreateCVDto {
   @ApiProperty({
     example: Date.now(),
   })
-  @IsNumber()
+  @IsTimestamp()
   public createdAt: number;
 
   @ApiProperty({
     example: Date.now(),
   })
-  @IsNumber()
+  @IsTimestamp()
   public updatedAt: number;
 }
