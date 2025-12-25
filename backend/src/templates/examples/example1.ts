@@ -1,4 +1,4 @@
-import type { CreateCVDto } from "src/cvs-module/dto/create-cv.dto";
+import type { CreateCVDto } from "src/cvs/dto/create-cv.dto";
 
 export function cvExample1Template(dto: CreateCVDto): string {
   const fullName = [dto.firstName, dto.middleName, dto.lastName]
