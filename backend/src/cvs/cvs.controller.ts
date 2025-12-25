@@ -1,4 +1,13 @@
-import { Body, Controller, Post, Res } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  ParseFilePipeBuilder,
+  Post,
+  Res,
+  UploadedFile,
+  UseInterceptors,
+} from "@nestjs/common";
+import { FileInterceptor } from "@nestjs/platform-express";
 import type { Response } from "express";
 
 import { CvsService } from "./cvs.service";
@@ -23,6 +32,35 @@ export class CvsController {
     res.set({
       "Content-Type": "application/pdf",
       "Content-Disposition": `attachment; filename=${createCVDto.cVName}.pdf`,
+      "Content-Length": pdfBuffer.length,
+    });
+
+    res.end(pdfBuffer);
+
+    return void 0;
+  }
+
+  @Post("pdf-from-static")
+  @UseInterceptors(FileInterceptor("file"))
+  async createPDFfromStatic(
+    @UploadedFile(
+      new ParseFilePipeBuilder()
+        .addMaxSizeValidator({ maxSize: 5 * 1024 * 1024 }) // 5 MB
+        .addFileTypeValidator({ fileType: /(html|htm)$/ })
+        .build({
+          fileIsRequired: true,
+        }),
+    )
+    file: Express.Multer.File,
+    @Res() res: Response,
+  ): Promise<void> {
+    const pdfBuffer = await this.cvsService.createPDFfromStatic(
+      file.buffer.toString(),
+    );
+
+    res.set({
+      "Content-Type": "application/pdf",
+      "Content-Disposition": `attachment; filename=resume.pdf`,
       "Content-Length": pdfBuffer.length,
     });
 

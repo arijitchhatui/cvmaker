@@ -21,7 +21,7 @@ export default function SendStaticPage() {
 
     try {
       const formData = new FormData();
-      formData.append("template", file);
+      formData.append("file", file);
 
       const response = await apiInstance.post<Blob>(
         "/cvs/pdf-from-static",
