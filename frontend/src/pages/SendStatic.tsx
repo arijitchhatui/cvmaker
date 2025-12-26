@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { AxiosError } from "axios";
 
 import apiInstance from "../lib/apiInstance";
 
@@ -46,9 +47,16 @@ export default function SendStaticPage() {
       toast.success("PDF generated successfully from static HTML template!");
     } catch (error) {
       console.error("Error generating PDF from static HTML template:", error);
-      toast.error(
-        "Failed to generate PDF from static HTML template. Please try again.",
-      );
+      if (error instanceof AxiosError) {
+        toast.error(
+          error.response?.data.message ||
+            "Failed to generate PDF from static HTML template. Please try again.",
+        );
+      } else {
+        toast.error(
+          "Failed to generate PDF from static HTML template. Please try again.",
+        );
+      }
     } finally {
       setIsLoading(false);
     }

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { AxiosError } from "axios";
 
 import apiInstance from "../lib/apiInstance";
 import { useCVsStore } from "../stores/cVsStore";
@@ -36,7 +37,13 @@ export default function PreviewPage() {
       setHtml(response.data);
     } catch (error) {
       console.error("Error generating CV preview:", error);
-      toast.error("Failed to generate CV preview. Please try again.");
+      if (error instanceof AxiosError) {
+        toast.error(
+          error.response?.data.message || "Failed to generate CV preview.",
+        );
+      } else {
+        toast.error("Failed to generate CV preview. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -87,7 +94,13 @@ export default function PreviewPage() {
       window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error("Error generating CV pdf:", error);
-      toast.error("Failed to generate CV PDF. Please try again.");
+      if (error instanceof AxiosError) {
+        toast.error(
+          error.response?.data.message || "Failed to generate CV PDF.",
+        );
+      } else {
+        toast.error("Failed to generate CV PDF. Please try again.");
+      }
     } finally {
       setIsLoading(false);
       setDownloadProgress(0);
