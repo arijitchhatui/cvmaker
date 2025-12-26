@@ -8,6 +8,7 @@ import {
   UseInterceptors,
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
+import { ApiBody, ApiConsumes } from "@nestjs/swagger";
 import type { Response } from "express";
 
 import { CvsService } from "./cvs.service";
@@ -40,6 +41,19 @@ export class CvsController {
     return void 0;
   }
 
+  @ApiConsumes("multipart/form-data")
+  @ApiBody({
+    description: "Static HTML template file",
+    schema: {
+      type: "object",
+      properties: {
+        file: {
+          type: "string",
+          format: "binary",
+        },
+      },
+    },
+  })
   @Post("pdf-from-static")
   @UseInterceptors(FileInterceptor("file"))
   async createPDFfromStatic(
