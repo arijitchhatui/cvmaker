@@ -81,6 +81,7 @@ export default function FormSection({
         <hr className="border-zinc-700" />
       </div>
 
+      {/*
       <div>
         <label className="mb-1 block text-sm text-zinc-400">Avatar URL</label>
         <input
@@ -116,11 +117,8 @@ export default function FormSection({
             </button>
           </div>
         )}
-      </div>
-
-      <div className="pt-4">
-        <hr className="border-zinc-700" />
-      </div>
+      </div> Temporarily removed avatar field
+      */}
 
       <div>
         <label className="mb-1 block text-sm text-zinc-400">

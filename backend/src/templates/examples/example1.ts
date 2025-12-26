@@ -154,8 +154,6 @@ export function cvExample1Template(dto: CreateCVDto): string {
 
 <!-- SIDEBAR -->
 <aside class="sidebar">
-  ${dto.avatar ? `<img src="${dto.avatar}" class="avatar" />` : ""}
-
   <div class="name">${fullName}</div>
   ${dto.nickname ? `<div class="nickname">${dto.nickname}</div>` : ""}
 
