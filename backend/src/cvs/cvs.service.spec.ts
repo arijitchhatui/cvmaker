@@ -4,6 +4,38 @@ import { Test } from "@nestjs/testing";
 import { CvsService } from "./cvs.service";
 import type { CreateCVDto } from "./dto/create-cv.dto";
 
+const cvDefaultMockData: CreateCVDto = {
+  id: "1",
+  templateId: "template1",
+  locale: "en",
+  cVName: "John's CV",
+  firstName: "John",
+  lastName: "Doe",
+  middleName: null,
+  nickname: null,
+  contacts: {
+    email: null,
+    phone: null,
+  },
+  address: null,
+  avatar: null,
+  experience: [],
+  education: [],
+  skills: [],
+  projects: [],
+  certifications: [],
+  languages: [],
+  hobbies: [],
+  summary: null,
+  additionalInfo: null,
+  links: [],
+  objectives: null,
+  otherExperiences: [],
+  references: [],
+  createdAt: Date.now(),
+  updatedAt: Date.now(),
+};
+
 describe("CvsService", () => {
   let service: CvsService;
 
@@ -21,39 +53,7 @@ describe("CvsService", () => {
 
   describe("createCVPreview", () => {
     it("should create a CV preview", () => {
-      const cvData: CreateCVDto = {
-        id: "1",
-        templateId: "template1",
-        locale: "en",
-        cVName: "John's CV",
-        firstName: "John",
-        lastName: "Doe",
-        middleName: null,
-        nickname: null,
-        contacts: {
-          email: null,
-          phone: null,
-        },
-        address: null,
-        avatar: null,
-        experience: [],
-        education: [],
-        skills: [],
-        projects: [],
-        certifications: [],
-        languages: [],
-        hobbies: [],
-        summary: null,
-        additionalInfo: null,
-        links: [],
-        objectives: null,
-        otherExperiences: [],
-        references: [],
-        createdAt: Date.now(),
-        updatedAt: Date.now(),
-      };
-
-      const preview = service.createCVPreview(cvData);
+      const preview = service.createCVPreview(cvDefaultMockData);
 
       expect(preview).toBeDefined();
 
@@ -64,6 +64,49 @@ describe("CvsService", () => {
       const expectedPreviewEnd = "</html>";
 
       expect(preview.trim().endsWith(expectedPreviewEnd)).toBeTruthy();
+    });
+
+    it("should throw BadRequestException for unsupported locale", () => {
+      const invalidLocaleData = { ...cvDefaultMockData, locale: "fr" };
+
+      expect(() => {
+        service.createCVPreview(invalidLocaleData);
+      }).toThrow(
+        /Unsupported locale: fr. Supported locales are "en" and "pt"./,
+      );
+    });
+  });
+
+  describe("createCVPdf", () => {
+    it("should create a CV PDF buffer", async () => {
+      const pdfBuffer = await service.createCVPdf(cvDefaultMockData);
+
+      expect(pdfBuffer).toBeInstanceOf(Uint8Array);
+
+      expect(pdfBuffer.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe("createPDFfromStatic", () => {
+    it("should create a PDF buffer from static HTML content", async () => {
+      const htmlContent = `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>Test PDF</title>
+          </head>
+          <body>
+            <h1>Hello, PDF!</h1>
+            <p>This is a test PDF generated from static HTML content.</p>
+          </body>
+        </html>
+      `;
+
+      const pdfBuffer = await service.createPDFfromStatic(htmlContent);
+
+      expect(pdfBuffer).toBeInstanceOf(Uint8Array);
+
+      expect(pdfBuffer.length).toBeGreaterThan(0);
     });
   });
 });
