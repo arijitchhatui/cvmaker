@@ -32,7 +32,7 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-zinc-950 px-4 py-8 text-zinc-100">
-      <title>{t("Home")} - CV Maker</title>
+      <title>Home - CV Maker</title>
 
       <div className="mx-auto max-w-3xl space-y-8">
         <div className="rounded-lg border border-indigo-500/40 bg-indigo-500/10 px-4 py-3 text-sm text-indigo-300">

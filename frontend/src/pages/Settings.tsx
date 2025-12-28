@@ -10,7 +10,7 @@ export default function SettingsPage() {
 
   return (
     <main className="min-h-screen bg-zinc-950 px-6 py-10 text-zinc-100">
-      <title>{t("Settings")} - CV Maker</title>
+      <title>Settings - CV Maker</title>
 
       <div className="mx-auto max-w-2xl space-y-8">
         <h1 className="text-2xl font-semibold">{t("Settings")}</h1>

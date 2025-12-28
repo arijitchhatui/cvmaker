@@ -110,7 +110,7 @@ export default function PreviewPage() {
 
   return (
     <main className="flex min-h-screen flex-col items-center bg-zinc-950 px-6 py-10 text-zinc-100">
-      <title>{t("PreviewPageTitle")} - CV Maker</title>
+      <title>Preview - CV Maker</title>
 
       {isLoading && downloadProgress > 0 && (
         <div className="z-50 mt-2 w-full">

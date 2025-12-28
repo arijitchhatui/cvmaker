@@ -65,6 +65,8 @@ export default function SendStaticPage() {
 
   return (
     <main className="flex min-h-screen flex-col items-center bg-zinc-950 px-6 py-10 text-zinc-100">
+      <title>Send Static HTML - CV Maker</title>
+
       <h1 className="mb-6 text-3xl font-semibold">
         {t("SendStaticPageTitle")}
       </h1>
