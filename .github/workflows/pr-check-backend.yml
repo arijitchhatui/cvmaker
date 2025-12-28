@@ -67,6 +67,9 @@ jobs:
       - name: Run unit tests
         run: pnpm test:verb:cov
 
+      - name: Run E2E
+        run: pnpm test:e2e --runInBand --detectOpenHandles --forceExit
+
       - name: Build the project
         run: pnpm build
 
