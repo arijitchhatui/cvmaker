@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import puppeteer from "puppeteer";
 import { maxTimeoutMs } from "src/shared/constants";
+import { sanitizeHtmlString } from "src/shared/utils";
 import cvTemplates from "src/templates";
 import { type Locale, locales } from "src/templates/locales";
 
@@ -48,7 +49,9 @@ export class CvsService {
     });
     const page = await browser.newPage();
 
-    await page.setContent(content, {
+    const sanitizedContent = sanitizeHtmlString(content);
+
+    await page.setContent(sanitizedContent, {
       waitUntil: "networkidle0",
       timeout: maxTimeoutMs, // 60 seconds
     });
