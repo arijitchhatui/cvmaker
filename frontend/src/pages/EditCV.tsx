@@ -18,6 +18,7 @@ export default function EditCVPage() {
   const [cV, setCV] = useState<CV>({
     id: cVFinded?.id || "",
     cVName: cVFinded?.cVName || "",
+    locale: cVFinded?.locale || "en",
     firstName: cVFinded?.firstName || "",
     lastName: cVFinded?.lastName || "",
     middleName: cVFinded?.middleName || null,
@@ -47,6 +48,7 @@ export default function EditCVPage() {
 
     updateCV(cVFindedId, {
       cVName: cV.cVName,
+      locale: cV.locale,
       firstName: cV.firstName,
       lastName: cV.lastName,
       middleName: cV.middleName,

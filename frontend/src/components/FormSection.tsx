@@ -1,4 +1,4 @@
-import type { CV } from "../types";
+import type { CV, locale } from "../types";
 import RepeatableSection from "./RepeatableSection";
 
 interface FormSectionProps {
@@ -16,6 +16,18 @@ export default function FormSection({
 }: FormSectionProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
+      <div className="text-lg font-semibold text-zinc-200">
+        <label>CV Language</label>
+        <select
+          value={cV.locale}
+          onChange={(e) => setCV({ ...cV, locale: e.target.value as locale })}
+          className="ml-4 rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 outline-none focus:border-indigo-500"
+        >
+          <option value="en">English</option>
+          <option value="pt">Português</option>
+        </select>
+      </div>
+
       <div>
         <label className="mb-1 block text-sm text-zinc-400">
           CV name <span className="text-red-500">*</span>
