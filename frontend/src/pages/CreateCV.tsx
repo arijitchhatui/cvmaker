@@ -12,6 +12,7 @@ export default function CreateCVPage() {
   const { t } = useTranslation();
 
   const navigate = useNavigate();
+
   const { createCV } = useCVsStore();
 
   const [cV, setCV] = useState<CV>({

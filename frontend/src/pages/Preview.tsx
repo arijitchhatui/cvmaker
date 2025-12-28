@@ -5,10 +5,14 @@ import { AxiosError } from "axios";
 
 import apiInstance from "../lib/apiInstance";
 import { useCVsStore } from "../stores/cVsStore";
+import { useUserStore } from "../stores/userStore";
 import type { CV, TemplateIds } from "../types";
 
 export default function PreviewPage() {
   const { t } = useTranslation();
+
+  const { isLoading, setIsLoading } = useUserStore();
+  const { cVs } = useCVsStore();
 
   const [html, setHtml] = useState<string>("");
 
@@ -16,10 +20,7 @@ export default function PreviewPage() {
   const [selectedTemplateId, setSelectedTemplateId] =
     useState<TemplateIds | null>(null);
 
-  const [isLoading, setIsLoading] = useState(false);
   const [downloadProgress, setDownloadProgress] = useState<number>(0);
-
-  const { cVs } = useCVsStore();
 
   async function handleSubmitPreview(
     selectedCV: CV | null,

@@ -4,12 +4,14 @@ import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 
 import apiInstance from "../lib/apiInstance";
+import { useUserStore } from "../stores/userStore";
 
 export default function SendStaticPage() {
   const { t } = useTranslation();
 
+  const { isLoading, setIsLoading } = useUserStore();
+
   const [file, setFile] = useState<File | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
