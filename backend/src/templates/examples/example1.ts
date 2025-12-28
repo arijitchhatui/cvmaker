@@ -21,6 +21,11 @@ export function cvExample1Template(
 <title>${dto.cVName}</title>
 
 <style>
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
   :root {
     --primary: #111827;
     --secondary: #374151;
@@ -38,16 +43,23 @@ export function cvExample1Template(
   body {
     margin: 0;
     padding: 0;
+    width: 210mm;
+    height: 297mm;
     background: white;
     font-size: 13px;
     line-height: 1.4;
-    height: auto;
+  }
+
+  body {
+    overflow: hidden;
   }
 
   .cv {
     display: flex;
     width: 100%;
-    min-height: 100%;
+    height: 100%;
+    min-height: 297mm;
+    page-break-inside: avoid;
   }
 
   .sidebar {
@@ -55,7 +67,7 @@ export function cvExample1Template(
     background: var(--primary);
     color: #e5e7eb;
     padding: 20px 18px;
-    align-self: stretch;
+    height: 100%;
   }
 
   .sidebar * {
@@ -106,6 +118,7 @@ export function cvExample1Template(
     padding: 24px 28px;
     color: var(--primary);
     background: white;
+    height: 100%;
   }
 
   section,
@@ -160,14 +173,10 @@ export function cvExample1Template(
   footer {
     font-size: 10px;
     color: var(--muted);
-    margin-top: 20px;
+    margin-top: auto;
     border-top: 1px solid #e5e7eb;
     padding-top: 8px;
     break-inside: avoid;
-  }
-
-  @page {
-    margin: 0;
   }
 </style>
 </head>

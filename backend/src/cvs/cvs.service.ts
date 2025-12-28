@@ -53,7 +53,11 @@ export class CvsService {
       timeout: maxTimeoutMs, // 60 seconds
     });
 
-    const pdfBuffer = await page.pdf({ format: "A4", printBackground: true });
+    const pdfBuffer = await page.pdf({
+      format: "A4",
+      printBackground: true,
+      preferCSSPageSize: true,
+    });
 
     await browser.close();
 
