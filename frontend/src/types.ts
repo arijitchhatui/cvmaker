@@ -1,4 +1,4 @@
-export type locale = "en" | "pt";
+export type locale = "en" | "pt" | "de";
 
 export type locales = locale[];
 

@@ -1,7 +1,8 @@
+import de from "./de.json";
 import en from "./en.json";
 import pt from "./pt.json";
 
-export type Locale = "en" | "pt";
+export type Locale = "en" | "pt" | "de";
 
 export type Locales = Locale[];
 
@@ -10,6 +11,7 @@ export type LocaleContent = typeof en;
 const translations = {
   en,
   pt,
+  de,
 } satisfies Record<Locale, LocaleContent>;
 
 export function isLocale(value: string): value is Locale {
