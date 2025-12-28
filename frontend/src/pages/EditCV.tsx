@@ -111,16 +111,22 @@ export default function EditCVPage() {
         </div>
 
         <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow">
-          <div>
-            <div className="mb-6 flex items-center justify-between">
-              <h1 className="text-2xl font-semibold">{t("EditCV")}</h1>
-              <button
-                onClick={() => handleDelete(cVFinded.id)}
-                className="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-500"
-              >
-                {t("DeleteCV")}
-              </button>
-            </div>
+          <div className="mb-4 border-b border-zinc-800 pb-4">
+            <button
+              onClick={() => navigate("/")}
+              className="text-zinc-400 transition hover:text-zinc-200"
+            >
+              ← {t("GoBackHome")}
+            </button>
+          </div>
+          <div className="mb-6 flex items-center justify-between">
+            <h1 className="text-2xl font-semibold">{t("EditCV")}</h1>
+            <button
+              onClick={() => handleDelete(cVFinded.id)}
+              className="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-500"
+            >
+              {t("DeleteCV")}
+            </button>
           </div>
 
           <FormSection

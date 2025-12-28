@@ -93,6 +93,15 @@ export default function CreateCVPage() {
         </div>
 
         <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow">
+          <div className="mb-4 border-b border-zinc-800 pb-4">
+            <button
+              onClick={() => navigate("/")}
+              className="text-zinc-400 transition hover:text-zinc-200"
+            >
+              ← {t("GoBackHome")}
+            </button>
+          </div>
+
           <h1 className="mb-6 text-2xl font-semibold">{t("CreateCV")}</h1>
           <FormSection
             cV={cV}
