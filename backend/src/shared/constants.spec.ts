@@ -14,8 +14,8 @@ describe("constants", () => {
   });
 
   describe("maxTimeoutMs", () => {
-    it("should be 60000 milliseconds", () => {
-      expect(maxTimeoutMs).toBe(60000);
+    it("should be 2 * 60000 milliseconds", () => {
+      expect(maxTimeoutMs).toBe(2 * 60000);
     });
   });
 });

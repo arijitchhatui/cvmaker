@@ -45,7 +45,7 @@ export class CvsService {
     content: string,
   ): Promise<Uint8Array<ArrayBufferLike>> {
     const browser = await puppeteer.launch({
-      timeout: maxTimeoutMs, // 60 seconds
+      timeout: maxTimeoutMs,
     });
     const page = await browser.newPage();
 
@@ -53,7 +53,7 @@ export class CvsService {
 
     await page.setContent(sanitizedContent, {
       waitUntil: "networkidle0",
-      timeout: maxTimeoutMs, // 60 seconds
+      timeout: maxTimeoutMs,
     });
 
     const pdfBuffer = await page.pdf({
