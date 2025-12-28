@@ -3,6 +3,7 @@ import { Link } from "react-router";
 const navLinks = [
   { to: "/send-static", label: "Send Static" },
   { to: "/create", label: "Create CV" },
+  { to: "/settings", label: "Settings" },
 ];
 
 export function Header() {

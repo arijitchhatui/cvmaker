@@ -9,6 +9,7 @@ import HomePage from "./pages/Home";
 import NotFoundPage from "./pages/NotFound";
 import PreviewPage from "./pages/Preview";
 import SendStaticPage from "./pages/SendStatic";
+import SettingsPage from "./pages/Settings";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/edit/:id" element={<EditCVPage />} />
         <Route path="/preview" element={<PreviewPage />} />
         <Route path="/send-static" element={<SendStaticPage />} />
+        <Route path="/settings" element={<SettingsPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
