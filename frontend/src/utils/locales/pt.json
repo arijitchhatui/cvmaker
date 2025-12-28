@@ -141,5 +141,9 @@
   "Portuguese": "Português",
   "German": "Alemão",
 
+  "CloneCV": "Clonar Currículo",
+  "CloneCVSuccess": "Currículo clonado com sucesso.",
+  "CloneCVError": "Ocorreu um erro ao clonar o currículo. Tente novamente.",
+
   "YouNeedToEnableJavascriptToRunThisApp": "Você precisa habilitar o JavaScript para rodar este aplicativo."
 }

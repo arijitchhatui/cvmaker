@@ -6,13 +6,14 @@ import { toast } from "react-toastify";
 import FormSection from "../components/FormSection";
 import { useCVsStore } from "../stores/cVsStore";
 import type { CV } from "../types";
+import { generateTimeBasedId } from "../utils/generals";
 import NotFoundPage from "./NotFound";
 
 export default function EditCVPage() {
   const { t } = useTranslation();
 
   const { id } = useParams<{ id: string }>();
-  const { cVs, updateCV, deleteCV } = useCVsStore();
+  const { cVs, updateCV, deleteCV, createCV } = useCVsStore();
 
   const navigate = useNavigate();
 
@@ -121,6 +122,37 @@ export default function EditCVPage() {
           </div>
           <div className="mb-6 flex items-center justify-between">
             <h1 className="text-2xl font-semibold">{t("EditCV")}</h1>
+            <button
+              onClick={(e) => handleSubmit(e, cVFinded.id)}
+              className="mr-4 rounded-md bg-emerald-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-emerald-500"
+            >
+              {t("UpdateCVData")}
+            </button>
+            <button
+              onClick={() => {
+                const newId = generateTimeBasedId();
+
+                createCV({
+                  ...cV,
+                  id: newId,
+                  cVName: `${cV.cVName} (Clone)`,
+                  createdAt: Date.now(),
+                  updatedAt: Date.now(),
+                });
+
+                toast.success(t("CloneCVSuccess"));
+
+                navigate(`/edit/${newId}`);
+
+                // Reload the page to ensure all states are fresh
+                setTimeout(() => {
+                  window.location.reload();
+                }, 750);
+              }}
+              className="mr-4 rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-500"
+            >
+              {t("CloneCV")}
+            </button>
             <button
               onClick={() => handleDelete(cVFinded.id)}
               className="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-500"

@@ -102,7 +102,17 @@ export default function CreateCVPage() {
             </button>
           </div>
 
-          <h1 className="mb-6 text-2xl font-semibold">{t("CreateCV")}</h1>
+          <div className="mb-6 flex items-center justify-between">
+            <h1 className="mb-6 text-2xl font-semibold">{t("CreateCV")}</h1>
+
+            <button
+              onClick={(e) => handleSubmit(e)}
+              className="mr-4 rounded-md bg-emerald-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-emerald-500"
+            >
+              {t("CreateCVData")}
+            </button>
+          </div>
+
           <FormSection
             cV={cV}
             setCV={setCV}

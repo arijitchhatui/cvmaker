@@ -141,5 +141,9 @@
   "Portuguese": "Portuguese",
   "German": "German",
 
+  "CloneCV": "Clone CV",
+  "CloneCVSuccess": "CV cloned successfully.",
+  "CloneCVError": "An error occurred while cloning the CV. Please try again.",
+
   "YouNeedToEnableJavascriptToRunThisApp": "You need to enable JavaScript to run this app."
 }

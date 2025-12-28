@@ -141,5 +141,9 @@
   "Portuguese": "Portugiesisch",
   "German": "Deutsch",
 
+  "CloneCV": "Lebenslauf klonen",
+  "CloneCVSuccess": "Lebenslauf erfolgreich geklont.",
+  "CloneCVError": "Beim Klonen des Lebenslaufs ist ein Fehler aufgetreten. Bitte versuche es erneut.",
+
   "YouNeedToEnableJavascriptToRunThisApp": "Du musst JavaScript aktivieren, um diese Anwendung auszuführen."
 }
