@@ -51,6 +51,18 @@ describe("CvsService", () => {
     expect(service).toBeDefined();
   });
 
+  describe("validateLocale", () => {
+    it("should throw BadRequestException for unsupported locale", () => {
+      const invalidLocaleData = { ...cvDefaultMockData, locale: "fr" };
+
+      expect(() => {
+        service.createCVPreview(invalidLocaleData);
+      }).toThrow(
+        /Unsupported locale: fr. Supported locales are "en" and "pt"./,
+      );
+    });
+  });
+
   describe("createCVPreview", () => {
     it("should create a CV preview", () => {
       const preview = service.createCVPreview(cvDefaultMockData);
@@ -64,16 +76,6 @@ describe("CvsService", () => {
       const expectedPreviewEnd = "</html>";
 
       expect(preview.trim().endsWith(expectedPreviewEnd)).toBeTruthy();
-    });
-
-    it("should throw BadRequestException for unsupported locale", () => {
-      const invalidLocaleData = { ...cvDefaultMockData, locale: "fr" };
-
-      expect(() => {
-        service.createCVPreview(invalidLocaleData);
-      }).toThrow(
-        /Unsupported locale: fr. Supported locales are "en" and "pt"./,
-      );
     });
   });
 
