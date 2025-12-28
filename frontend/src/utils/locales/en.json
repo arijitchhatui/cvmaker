@@ -138,5 +138,7 @@
   "ProjectSourceCodeAvailableOnColonSpace": "Project source code available on: ",
 
   "English": "English",
-  "Portuguese": "Portuguese"
+  "Portuguese": "Portuguese",
+
+  "YouNeedToEnableJavascriptToRunThisApp": "You need to enable JavaScript to run this app."
 }

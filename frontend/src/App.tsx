@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { ToastContainer } from "react-toastify";
 
@@ -12,6 +14,18 @@ import SendStaticPage from "./pages/SendStatic";
 import SettingsPage from "./pages/Settings";
 
 function App() {
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    document.documentElement.lang = i18n.language;
+
+    const nonScriptElement = document.getElementById("nonscript");
+
+    if (nonScriptElement) {
+      nonScriptElement.textContent = t("YouNeedToEnableJavascriptToRunThisApp");
+    }
+  }, [i18n.language, t]);
+
   return (
     <BrowserRouter>
       <ToastContainer autoClose={3500} />
