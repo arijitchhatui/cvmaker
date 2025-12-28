@@ -85,4 +85,34 @@ describe("sanitizeHtmlString", () => {
 
     expect(output).toBe("");
   });
+
+  it("should remove HTML comments", () => {
+    const input = "<div>Hello</div><!-- This is a comment --><p>World</p>";
+    const output = sanitizeHtmlString(input);
+
+    expect(output).toBe("<div>Hello</div><p>World</p>");
+  });
+
+  it("should remove iframe, object, and embed tags", () => {
+    const input =
+      '<div>Hello</div><iframe src="malicious.html"></iframe><object></object><embed></embed><p>World</p>';
+    const output = sanitizeHtmlString(input);
+
+    expect(output).toBe("<div>Hello</div><p>World</p>");
+  });
+
+  it("should remove multiple dangerous elements and attributes", () => {
+    const input =
+      '<div onclick="hack()">Click me</div><!-- comment --><script>alert("XSS")</script><iframe src="malicious.html"></iframe>';
+    const output = sanitizeHtmlString(input);
+
+    expect(output).toBe("<div>Click me</div>");
+  });
+
+  it("should trim the output", () => {
+    const input = "   <div>Hello World</div>   ";
+    const output = sanitizeHtmlString(input);
+
+    expect(output).toBe("<div>Hello World</div>");
+  });
 });

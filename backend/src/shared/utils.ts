@@ -20,10 +20,9 @@ export function sanitizeHtmlString(input: string): string {
   do {
     prev = output;
 
-    output = output.replace(
-      /<\s*script\b[^>]*>[\s\S]*?<\s*\/\s*script\s*>/gi,
-      "",
-    );
+    output = output.replace(/<!--[\s\S]*?-->/g, "");
+
+    output = output.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "");
 
     output = output.replace(
       /<\s*(iframe|object|embed)\b[^>]*>[\s\S]*?<\s*\/\s*\1\s*>/gi,
