@@ -65,7 +65,7 @@ jobs:
         run: pnpm lint
 
       - name: Run unit tests
-        run: pnpm test:verb:cov
+        run: pnpm test:verb:cov -u
 
       - name: Run E2E
         run: pnpm test:e2e --runInBand --detectOpenHandles --forceExit
