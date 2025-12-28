@@ -15,6 +15,10 @@ const logger = new Logger("Bootstrap");
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
+  const server = app.getHttpServer();
+
+  server.setTimeout(1 * 60 * 1000); // 1 minutes
+
   const configService = app.get(ConfigService<EnvGlobalConfig, true>);
 
   const { nodeEnv, port } = configService.get("server", { infer: true });
