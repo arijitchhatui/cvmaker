@@ -13,10 +13,11 @@ import NotFoundPage from "./NotFound";
 export default function EditCVPage() {
   const { t } = useTranslation();
 
-  const { id } = useParams<{ id: string }>();
-  const { cVs, updateCV, deleteCV, createCV } = useCVsStore();
-
   const navigate = useNavigate();
+
+  const { id } = useParams<{ id: string }>();
+
+  const { cVs, updateCV, deleteCV, createCV } = useCVsStore();
 
   const cVFinded = cVs.find((cV) => cV.id === id);
 
@@ -61,28 +62,7 @@ export default function EditCVPage() {
     }
 
     updateCV(cVFindedId, {
-      cVName: cV.cVName,
-      locale: cV.locale,
-      firstName: cV.firstName,
-      lastName: cV.lastName,
-      middleName: cV.middleName,
-      nickname: cV.nickname,
-      avatar: cV.avatar,
-      contacts: cV.contacts,
-      address: cV.address,
-      summary: cV.summary,
-      objectives: cV.objectives,
-      education: cV.education,
-      experience: cV.experience,
-      skills: cV.skills,
-      projects: cV.projects,
-      certifications: cV.certifications,
-      languages: cV.languages,
-      hobbies: cV.hobbies,
-      additionalInfo: cV.additionalInfo,
-      otherExperiences: cV.otherExperiences,
-      references: cV.references,
-      links: cV.links,
+      ...cV,
       updatedAt: Date.now(),
     });
 
