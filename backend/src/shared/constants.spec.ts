@@ -1,12 +1,21 @@
-import { apiPrefix, clientDistPath } from "./constants";
-
-const constants = {
-  apiPrefix,
-  clientDistPath,
-};
+import { apiPrefix, clientDistPath, maxTimeoutMs } from "./constants";
 
 describe("constants", () => {
-  it("should match the snapshot", (): void => {
-    expect(constants).toMatchSnapshot();
+  describe("apiPrefix", () => {
+    it("should be 'api'", () => {
+      expect(apiPrefix).toBe("api");
+    });
+  });
+
+  describe("clientDistPath", () => {
+    it("should end with 'frontend/dist'", () => {
+      expect(clientDistPath.endsWith("frontend/dist")).toBe(true);
+    });
+  });
+
+  describe("maxTimeoutMs", () => {
+    it("should be 60000 milliseconds", () => {
+      expect(maxTimeoutMs).toBe(60000);
+    });
   });
 });
