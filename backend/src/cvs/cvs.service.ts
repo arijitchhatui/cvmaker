@@ -7,18 +7,21 @@ import { CreateCVDto } from "./dto/create-cv.dto";
 
 @Injectable()
 export class CvsService {
-  private validateLocale(locale: string): boolean {
+  private validateLocale(locale: string): void {
     const supportedLocales: Locales = ["en", "pt"];
 
-    return supportedLocales.includes(locale as Locale);
+    const isValid = supportedLocales.includes(locale as Locale);
+
+    if (!isValid) {
+      throw new BadRequestException(
+        `Unsupported locale: ${locale}. Supported locales are "en" and "pt".`,
+      );
+    }
   }
 
   createCVPreview(createCVDto: CreateCVDto): string {
-    if (!this.validateLocale(createCVDto.locale)) {
-      throw new BadRequestException(
-        `Unsupported locale: ${createCVDto.locale}. Supported locales are "en" and "pt".`,
-      );
-    }
+    // Validate locale
+    this.validateLocale(createCVDto.locale);
 
     const htmlPreview = cvTemplates(createCVDto, createCVDto.locale as Locale);
 
@@ -28,11 +31,8 @@ export class CvsService {
   async createCVPdf(
     createCVDto: CreateCVDto,
   ): Promise<Uint8Array<ArrayBufferLike>> {
-    if (!this.validateLocale(createCVDto.locale)) {
-      throw new BadRequestException(
-        `Unsupported locale: ${createCVDto.locale}. Supported locales are "en" and "pt".`,
-      );
-    }
+    // Validate locale
+    this.validateLocale(createCVDto.locale);
 
     const html = cvTemplates(createCVDto, createCVDto.locale as Locale);
 
