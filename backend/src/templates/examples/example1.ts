@@ -22,163 +22,150 @@ export function cvExample1Template(
 <title>${dto.cVName}</title>
 
 <style>
-  @page {
-    size: A4;
-    margin: 0;
-  }
+@page {
+  size: A4;
+  margin: 0;
+}
 
-  :root {
-    --primary: #111827;
-    --secondary: #374151;
-    --muted: #6b7280;
-    --accent: #2563eb;
-    --bg-soft: #f9fafb;
-  }
+:root {
+  --primary: #111827;
+  --secondary: #374151;
+  --muted: #6b7280;
+  --accent: #2563eb;
+  --bg-soft: #f9fafb;
+}
 
-  * {
-    box-sizing: border-box;
-    font-family: "Inter", Arial, sans-serif;
-  }
+* {
+  box-sizing: border-box;
+  font-family: "Inter", Arial, sans-serif;
+}
 
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-    width: 210mm;
-    height: 297mm;
-    background: white;
-    font-size: 13px;
-    line-height: 1.4;
-  }
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 210mm;
+  font-size: 13px;
+  line-height: 1.4;
+  background: white;
+}
 
-  body {
-    overflow: hidden;
-  }
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 100%;
+  background: var(--primary);
+  color: #e5e7eb;
+  padding: 20px 18px;
+}
 
-  .cv {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    min-height: 297mm;
-    page-break-inside: avoid;
-  }
+.sidebar * {
+  break-inside: avoid;
+}
 
-  .sidebar {
-    width: 300px;
-    background: var(--primary);
-    color: #e5e7eb;
-    padding: 20px 18px;
-    height: 100%;
-  }
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+}
 
-  .sidebar * {
-    break-inside: avoid;
-  }
+.name {
+  font-size: 22px;
+  font-weight: 700;
+}
 
-  .avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 12px;
-  }
+.nickname {
+  font-size: 12px;
+  color: #9ca3af;
+}
 
-  .name {
-    font-size: 22px;
-    font-weight: 700;
-  }
+.side-section {
+  margin-top: 16px;
+}
 
-  .nickname {
-    font-size: 12px;
-    color: #9ca3af;
-  }
+.side-section h3 {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #93c5fd;
+  margin-bottom: 6px;
+}
 
-  .side-section {
-    margin-top: 16px;
-  }
+.side-section p,
+.side-section li,
+.side-section a {
+  font-size: 12px;
+  color: #e5e7eb;
+  margin: 2px 0;
+  text-decoration: none;
+}
 
-  .side-section h3 {
-    font-size: 11px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: #93c5fd;
-    margin-bottom: 6px;
-  }
+.content {
+  margin-left: 300px;
+  padding: 24px 28px;
+  color: var(--primary);
+  background: white;
+}
 
-  .side-section p,
-  .side-section li,
-  .side-section a {
-    font-size: 12px;
-    color: #e5e7eb;
-    margin: 2px 0;
-    text-decoration: none;
-  }
+section {
+  margin-bottom: 20px;
+  break-inside: avoid;
+}
 
-  .content {
-    flex: 1;
-    padding: 24px 28px;
-    color: var(--primary);
-    background: white;
-    height: 100%;
-  }
+h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 4px;
+  break-after: avoid;
+}
 
-  section,
-  .item {
-    break-inside: avoid;
-  }
+.item {
+  margin-bottom: 10px;
+  break-inside: avoid;
+}
 
-  section {
-    margin-bottom: 20px;
-  }
+.item-title {
+  font-weight: 600;
+  font-size: 14px;
+}
 
-  h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    border-bottom: 2px solid #e5e7eb;
-    padding-bottom: 4px;
-    break-after: avoid;
-  }
+.item-subtitle {
+  font-size: 12px;
+  color: var(--secondary);
+}
 
-  .item {
-    margin-bottom: 10px;
-  }
+.dates {
+  font-size: 11px;
+  color: var(--muted);
+}
 
-  .item-title {
-    font-weight: 600;
-    font-size: 14px;
-  }
+.tags span {
+  display: inline-block;
+  padding: 4px 8px;
+  background: var(--bg-soft);
+  border-radius: 999px;
+  font-size: 11px;
+  margin: 2px 4px 0 0;
+}
 
-  .item-subtitle {
-    font-size: 12px;
-    color: var(--secondary);
-  }
+a {
+  color: var(--accent);
+  word-break: break-word;
+}
 
-  .dates {
-    font-size: 11px;
-    color: var(--muted);
-  }
-
-  .tags span {
-    display: inline-block;
-    padding: 4px 8px;
-    background: var(--bg-soft);
-    border-radius: 999px;
-    font-size: 11px;
-    margin: 2px 4px 0 0;
-  }
-
-  a {
-    color: var(--accent);
-  }
-
-  footer {
-    font-size: 10px;
-    color: var(--muted);
-    margin-top: auto;
-    border-top: 1px solid #e5e7eb;
-    padding-top: 8px;
-    break-inside: avoid;
-  }
+footer {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 24px;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 8px;
+  break-inside: avoid;
+}
 </style>
 </head>
 
