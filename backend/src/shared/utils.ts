@@ -21,16 +21,14 @@ export function sanitizeHtmlString(input: string): string {
     prev = output;
 
     output = output.replace(
-      /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
+      /<\s*script\b[^>]*>[\s\S]*?<\s*\/\s*script\s*>/gi,
       "",
     );
 
     output = output.replace(
-      /<(iframe|object|embed)\b[^>]*>([\s\S]*?)<\/\1>/gi,
+      /<\s*(iframe|object|embed)\b[^>]*>[\s\S]*?<\s*\/\s*\1\s*>/gi,
       "",
     );
-
-    output = output.replace(/<(iframe|object|embed)\b[^/]*\/?>/gi, "");
 
     output = output.replace(/\son\w+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi, "");
 
