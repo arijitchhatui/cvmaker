@@ -146,4 +146,17 @@ describe("CvsService", () => {
       ),
     );
   });
+
+  it("should close Puppeteer browser if an error occurs during PDF creation", async () => {
+    const invalidData = {
+      ...cvDefaultMockData,
+      firstName: "😊",
+    };
+
+    await expect(
+      service.createCVPdf(invalidData),
+    ).rejects.toThrowErrorMatchingInlineSnapshot(
+      `"Failed to sanitize HTML content: Input string contains unsupported emoji characters."`,
+    );
+  });
 });
