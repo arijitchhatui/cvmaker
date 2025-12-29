@@ -51,8 +51,8 @@ describe("sanitizeHtmlString", () => {
     const input = '<div>Hello</div><script>alert("XSS")</script><p>World</p>';
     const output = sanitizeHtmlString(input);
 
-    expect(output).toBe(
-      "<html><head></head><body><div>Hello</div><p>World</p></body></html>",
+    expect(output.result).toBe(
+      "<!DOCTYPE html><html><head></head><body><div>Hello</div><p>World</p></body></html>",
     );
   });
 
@@ -60,8 +60,8 @@ describe("sanitizeHtmlString", () => {
     const input = '<button onclick="doSomething()">Click me</button>';
     const output = sanitizeHtmlString(input);
 
-    expect(output).toBe(
-      "<html><head></head><body><button>Click me</button></body></html>",
+    expect(output.result).toBe(
+      "<!DOCTYPE html><html><head></head><body><button>Click me</button></body></html>",
     );
   });
 
@@ -70,8 +70,8 @@ describe("sanitizeHtmlString", () => {
       "<div><strong>Bold Text</strong> and <em>Italic Text</em></div>";
     const output = sanitizeHtmlString(input);
 
-    expect(output).toBe(
-      "<html><head></head><body><div><strong>Bold Text</strong> and <em>Italic Text</em></div></body></html>",
+    expect(output.result).toBe(
+      "<!DOCTYPE html><html><head></head><body><div><strong>Bold Text</strong> and <em>Italic Text</em></div></body></html>",
     );
   });
 
@@ -80,8 +80,8 @@ describe("sanitizeHtmlString", () => {
       '<a href="javascript:alert(\'XSS\')" style="color:red;" onmouseover="stealCookies()">Click me</a>';
     const output = sanitizeHtmlString(input);
 
-    expect(output).toBe(
-      '<html><head></head><body><a style="color:red;">Click me</a></body></html>',
+    expect(output.result).toBe(
+      '<!DOCTYPE html><html><head></head><body><a style="color:red;">Click me</a></body></html>',
     );
   });
 
@@ -89,15 +89,17 @@ describe("sanitizeHtmlString", () => {
     const input = "";
     const output = sanitizeHtmlString(input);
 
-    expect(output).toBe("<html><head></head><body></body></html>");
+    expect(output.result).toBe(
+      "<!DOCTYPE html><html><head></head><body></body></html>",
+    );
   });
 
   it("should remove HTML comments", () => {
     const input = "<div>Hello</div><!-- This is a comment --><p>World</p>";
     const output = sanitizeHtmlString(input);
 
-    expect(output).toBe(
-      "<html><head></head><body><div>Hello</div><p>World</p></body></html>",
+    expect(output.result).toBe(
+      "<!DOCTYPE html><html><head></head><body><div>Hello</div><p>World</p></body></html>",
     );
   });
 
@@ -106,8 +108,8 @@ describe("sanitizeHtmlString", () => {
       '<div>Hello</div><iframe src="malicious.html"></iframe><object></object><embed></embed><p>World</p>';
     const output = sanitizeHtmlString(input);
 
-    expect(output).toBe(
-      "<html><head></head><body><div>Hello</div><p>World</p></body></html>",
+    expect(output.result).toBe(
+      "<!DOCTYPE html><html><head></head><body><div>Hello</div><p>World</p></body></html>",
     );
   });
 
@@ -116,8 +118,8 @@ describe("sanitizeHtmlString", () => {
       '<div onclick="hack()">Click me</div><!-- comment --><script>alert("XSS")</script><iframe src="malicious.html"></iframe>';
     const output = sanitizeHtmlString(input);
 
-    expect(output).toBe(
-      "<html><head></head><body><div>Click me</div></body></html>",
+    expect(output.result).toBe(
+      "<!DOCTYPE html><html><head></head><body><div>Click me</div></body></html>",
     );
   });
 
@@ -125,8 +127,38 @@ describe("sanitizeHtmlString", () => {
     const input = "   <div>Hello World</div>   ";
     const output = sanitizeHtmlString(input);
 
-    expect(output).toBe(
-      "<html><head></head><body><div>Hello World</div></body></html>",
+    expect(output.result).toBe(
+      "<!DOCTYPE html><html><head></head><body><div>Hello World</div></body></html>",
+    );
+  });
+
+  it("should handle excessively large input", () => {
+    const input = "a".repeat(100_001); // 100,001 characters
+
+    const output = sanitizeHtmlString(input);
+
+    expect(output).toEqual({
+      result: "",
+      error: new Error("Input string is too large to sanitize."),
+    });
+  });
+
+  it("should handle input with emoji characters", () => {
+    const input = "<div>Hello 😊</div>";
+    const output = sanitizeHtmlString(input);
+
+    expect(output).toEqual({
+      result: "",
+      error: new Error("Input string contains unsupported emoji characters."),
+    });
+  });
+
+  it("should pass valid HTML without changes", () => {
+    const input = "<div><p>Valid Content</p></div>";
+    const output = sanitizeHtmlString(input);
+
+    expect(output.result).toBe(
+      "<!DOCTYPE html><html><head></head><body><div><p>Valid Content</p></div></body></html>",
     );
   });
 });

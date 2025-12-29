@@ -25,7 +25,15 @@ export class CvsService {
 
     const htmlPreview = cvTemplates(createCVDto, createCVDto.locale as Locale);
 
-    return htmlPreview;
+    const { result: sanitizedHtml, error } = sanitizeHtmlString(htmlPreview);
+
+    if (error) {
+      throw new BadRequestException(
+        `Failed to sanitize HTML content: ${error.message}`,
+      );
+    }
+
+    return sanitizedHtml;
   }
 
   async createCVPdf(
@@ -49,7 +57,14 @@ export class CvsService {
     });
     const page = await browser.newPage();
 
-    const sanitizedContent = sanitizeHtmlString(content);
+    const { result: sanitizedContent, error } = sanitizeHtmlString(content);
+
+    if (error) {
+      await browser.close();
+      throw new BadRequestException(
+        `Failed to sanitize HTML content: ${error.message}`,
+      );
+    }
 
     await page.setContent(sanitizedContent, {
       waitUntil: "networkidle0",

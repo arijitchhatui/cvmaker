@@ -17,12 +17,34 @@ export function sortByDate<T>(
 const window = new JSDOM("").window;
 const purify = DOMPurify(window);
 
-export function sanitizeHtmlString(input: string): string {
+export function sanitizeHtmlString(input: string): {
+  result: string;
+  error: Error | null;
+} {
+  if (input.length > 100_000) {
+    return {
+      result: "",
+      error: new Error("Input string is too large to sanitize."),
+    };
+  }
+
+  const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
+
+  if (emojiRegex.test(input)) {
+    return {
+      result: "",
+      error: new Error("Input string contains unsupported emoji characters."),
+    };
+  }
+
   input = input.trim();
 
   const sanitized = purify.sanitize(input, {
     WHOLE_DOCUMENT: true,
   });
 
-  return sanitized;
+  return {
+    result: `<!DOCTYPE html>${sanitized}`,
+    error: null,
+  };
 }

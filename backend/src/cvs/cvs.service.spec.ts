@@ -82,6 +82,21 @@ describe("CvsService", () => {
 
       expect(preview.trim().endsWith(expectedPreviewEnd)).toBeTruthy();
     });
+
+    it("should throw BadRequestException if HTML contains emoji", () => {
+      const emojiData = {
+        ...cvDefaultMockData,
+        firstName: "John 😊",
+      };
+
+      expect(() => {
+        service.createCVPreview(emojiData);
+      }).toThrow(
+        new RegExp(
+          "Failed to sanitize HTML content: Input string contains unsupported emoji characters.",
+        ),
+      );
+    });
   });
 
   describe("createCVPdf", () => {
@@ -115,5 +130,20 @@ describe("CvsService", () => {
 
       expect(pdfBuffer.length).toBeGreaterThan(0);
     });
+  });
+
+  it("should throw BadRequestException if HTML contains emoji", () => {
+    const emojiData = {
+      ...cvDefaultMockData,
+      firstName: "John 😊",
+    };
+
+    expect(() => {
+      service.createCVPreview(emojiData);
+    }).toThrow(
+      new RegExp(
+        "Failed to sanitize HTML content: Input string contains unsupported emoji characters.",
+      ),
+    );
   });
 });
