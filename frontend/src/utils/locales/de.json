@@ -145,5 +145,19 @@
   "CloneCVSuccess": "Lebenslauf erfolgreich geklont.",
   "CloneCVError": "Beim Klonen des Lebenslaufs ist ein Fehler aufgetreten. Bitte versuche es erneut.",
 
-  "YouNeedToEnableJavascriptToRunThisApp": "Du musst JavaScript aktivieren, um diese Anwendung auszuführen."
+  "YouNeedToEnableJavascriptToRunThisApp": "Du musst JavaScript aktivieren, um diese Anwendung auszuführen.",
+
+  "CVsManagement": "Verwaltung der Lebensläufe",
+  "ConfirmDeleteAllCVsMessage": "Möchtest du wirklich alle deine Lebensläufe löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
+  "AllCVsDeletedSuccessfully": "Alle Lebensläufe wurden erfolgreich gelöscht.",
+  "DeleteAllCVs": "Alle Lebensläufe löschen",
+  "DownloadCVsBackup": "Backup der Lebensläufe herunterladen",
+  "CVsImportedSuccessfully": "Lebensläufe erfolgreich importiert.",
+  "ErrorImportingCVs": "Beim Importieren der Lebensläufe ist ein Fehler aufgetreten. Bitte überprüfe, ob die Datei gültig ist, und versuche es erneut.",
+  "UploadCVsBackup": "Backup der Lebensläufe hochladen",
+  "Upload": "Hochladen",
+  "NoCVsFound": "Keine Lebensläufe gefunden.",
+  "CVSelectedForEditing": "Lebenslauf \"{{cvName}}\" zur Bearbeitung ausgewählt.",
+  "CVDeletedSuccessfully": "Lebenslauf \"{{cvName}}\" erfolgreich gelöscht.",
+  "ConfirmDeleteCVMessage": "Möchtest du wirklich den Lebenslauf \"{{cvName}}\" löschen? Diese Aktion kann nicht rückgängig gemacht werden."
 }

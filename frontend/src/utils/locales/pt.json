@@ -145,5 +145,19 @@
   "CloneCVSuccess": "Currículo clonado com sucesso.",
   "CloneCVError": "Ocorreu um erro ao clonar o currículo. Tente novamente.",
 
-  "YouNeedToEnableJavascriptToRunThisApp": "Você precisa habilitar o JavaScript para rodar este aplicativo."
+  "YouNeedToEnableJavascriptToRunThisApp": "Você precisa habilitar o JavaScript para rodar este aplicativo.",
+
+  "CVsManagement": "Gerenciamento de Currículos",
+  "ConfirmDeleteAllCVsMessage": "Tem certeza de que deseja excluir todos os seus currículos? Esta ação não pode ser desfeita.",
+  "AllCVsDeletedSuccessfully": "Todos os currículos foram excluídos com sucesso.",
+  "DeleteAllCVs": "Excluir Todos os Currículos",
+  "DownloadCVsBackup": "Baixar Backup dos Currículos",
+  "CVsImportedSuccessfully": "Currículos importados com sucesso.",
+  "ErrorImportingCVs": "Ocorreu um erro ao importar os currículos. Por favor, verifique se o arquivo é válido e tente novamente.",
+  "UploadCVsBackup": "Enviar Backup dos Currículos",
+  "Upload": "Enviar",
+  "NoCVsFound": "Nenhum currículo encontrado.",
+  "CVSelectedForEditing": "Currículo \"{{cvName}}\" selecionado para edição.",
+  "CVDeletedSuccessfully": "Currículo \"{{cvName}}\" excluído com sucesso.",
+  "ConfirmDeleteCVMessage": "Tem certeza de que deseja excluir o currículo \"{{cvName}}\"? Esta ação não pode ser desfeita."
 }

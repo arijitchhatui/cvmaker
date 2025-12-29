@@ -11,6 +11,7 @@ interface CVsStore {
   createCV: (cV: CV) => void;
   updateCV: (id: string, data: Partial<CV>) => void;
   deleteCV: (id: string) => void;
+  deleteAllCVs: () => void;
   setActiveCV: (id: string) => void;
 }
 
@@ -35,6 +36,12 @@ export const useCVsStore = create<CVsStore>()(
         set((state) => ({
           cVs: state.cVs.filter((cV) => cV.id !== id),
           activeCVId: state.activeCVId === id ? null : state.activeCVId,
+        })),
+
+      deleteAllCVs: () =>
+        set(() => ({
+          cVs: [],
+          activeCVId: null,
         })),
 
       setActiveCV: (id) =>

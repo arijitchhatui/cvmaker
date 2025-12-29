@@ -145,5 +145,19 @@
   "CloneCVSuccess": "CV cloned successfully.",
   "CloneCVError": "An error occurred while cloning the CV. Please try again.",
 
-  "YouNeedToEnableJavascriptToRunThisApp": "You need to enable JavaScript to run this app."
+  "YouNeedToEnableJavascriptToRunThisApp": "You need to enable JavaScript to run this app.",
+
+  "CVsManagement": "CV's Management",
+  "ConfirmDeleteAllCVsMessage": "Are you sure you want to delete all your CV's? This action cannot be undone.",
+  "AllCVsDeletedSuccessfully": "All CV's deleted successfully.",
+  "DeleteAllCVs": "Delete All CV's",
+  "DownloadCVsBackup": "Download CV's Backup",
+  "CVsImportedSuccessfully": "CV's imported successfully.",
+  "ErrorImportingCVs": "An error occurred while importing CV's. Please ensure the file is valid and try again.",
+  "UploadCVsBackup": "Upload CV's Backup",
+  "Upload": "Upload",
+  "NoCVsFound": "No CVs found.",
+  "CVSelectedForEditing": "CV \"{{cvName}}\" selected for editing.",
+  "CVDeletedSuccessfully": "CV \"{{cvName}}\" deleted successfully.",
+  "ConfirmDeleteCVMessage": "Are you sure you want to delete the CV \"{{cvName}}\"? This action cannot be undone."
 }
