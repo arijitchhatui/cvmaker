@@ -157,7 +157,6 @@
   "UploadCVsBackup": "Upload CV's Backup",
   "Upload": "Upload",
   "NoCVsFound": "No CVs found.",
-  "CVSelectedForEditing": "CV \"{{cvName}}\" selected for editing.",
   "CVDeletedSuccessfully": "CV \"{{cvName}}\" deleted successfully.",
   "ConfirmDeleteCVMessage": "Are you sure you want to delete the CV \"{{cvName}}\"? This action cannot be undone."
 }

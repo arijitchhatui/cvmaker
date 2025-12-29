@@ -172,11 +172,13 @@ export default function SettingsPage() {
                       onClick={() => {
                         if (
                           window.confirm(
-                            t("ConfirmDeleteCVMessage", { name: cv.cVName }),
+                            t("ConfirmDeleteCVMessage", { cvName: cv.cVName }),
                           )
                         ) {
                           deleteCV(cv.id);
-                          toast.success(t("CVDeletedSuccessfully"));
+                          toast.success(
+                            t("CVDeletedSuccessfully", { cvName: cv.cVName }),
+                          );
                         }
                       }}
                     >

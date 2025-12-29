@@ -157,7 +157,6 @@
   "UploadCVsBackup": "Enviar Backup dos Currículos",
   "Upload": "Enviar",
   "NoCVsFound": "Nenhum currículo encontrado.",
-  "CVSelectedForEditing": "Currículo \"{{cvName}}\" selecionado para edição.",
   "CVDeletedSuccessfully": "Currículo \"{{cvName}}\" excluído com sucesso.",
   "ConfirmDeleteCVMessage": "Tem certeza de que deseja excluir o currículo \"{{cvName}}\"? Esta ação não pode ser desfeita."
 }

@@ -157,7 +157,6 @@
   "UploadCVsBackup": "Backup der Lebensläufe hochladen",
   "Upload": "Hochladen",
   "NoCVsFound": "Keine Lebensläufe gefunden.",
-  "CVSelectedForEditing": "Lebenslauf \"{{cvName}}\" zur Bearbeitung ausgewählt.",
   "CVDeletedSuccessfully": "Lebenslauf \"{{cvName}}\" erfolgreich gelöscht.",
   "ConfirmDeleteCVMessage": "Möchtest du wirklich den Lebenslauf \"{{cvName}}\" löschen? Diese Aktion kann nicht rückgängig gemacht werden."
 }
