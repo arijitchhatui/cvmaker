@@ -59,7 +59,7 @@ export default function EditCVPage() {
     }
   }
 
-  const handleCloneCV = () => {
+  function handleCloneCV() {
     try {
       const newId = generateTimeBasedId();
 
@@ -81,7 +81,7 @@ export default function EditCVPage() {
     } catch {
       toast.error("Error cling CV");
     }
-  };
+  }
 
   if (!cVFinded) {
     return (
