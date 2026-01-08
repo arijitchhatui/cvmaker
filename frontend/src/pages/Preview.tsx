@@ -12,8 +12,9 @@ export default function PreviewPage() {
 
   const { cVs } = useCVsStore();
 
-  const [html, setHtml] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const [html, setHtml] = useState<string>("");
   const [selectedCV, setSelectedCV] = useState<CV | null>(null);
   const [downloadProgress, setDownloadProgress] = useState<number>(0);
   const [selectedTemplateId, setSelectedTemplateId] =
