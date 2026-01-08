@@ -82,21 +82,6 @@ describe("CvsService", () => {
 
       expect(preview.trim().endsWith(expectedPreviewEnd)).toBeTruthy();
     });
-
-    it("should throw BadRequestException if HTML contains emoji", () => {
-      const emojiData = {
-        ...cvDefaultMockData,
-        firstName: "John 😊",
-      };
-
-      expect(() => {
-        service.createCVPreview(emojiData);
-      }).toThrow(
-        new RegExp(
-          "Failed to sanitize HTML content: Input string contains unsupported emoji characters.",
-        ),
-      );
-    });
   });
 
   describe("createCVPdf", () => {
@@ -130,33 +115,5 @@ describe("CvsService", () => {
 
       expect(pdfBuffer.length).toBeGreaterThan(0);
     });
-  });
-
-  it("should throw BadRequestException if HTML contains emoji", () => {
-    const emojiData = {
-      ...cvDefaultMockData,
-      firstName: "John 😊",
-    };
-
-    expect(() => {
-      service.createCVPreview(emojiData);
-    }).toThrow(
-      new RegExp(
-        "Failed to sanitize HTML content: Input string contains unsupported emoji characters.",
-      ),
-    );
-  });
-
-  it("should close Puppeteer browser if an error occurs during PDF creation", async () => {
-    const invalidData = {
-      ...cvDefaultMockData,
-      firstName: "😊",
-    };
-
-    await expect(
-      service.createCVPdf(invalidData),
-    ).rejects.toThrowErrorMatchingInlineSnapshot(
-      `"Failed to sanitize HTML content: Input string contains unsupported emoji characters."`,
-    );
   });
 });

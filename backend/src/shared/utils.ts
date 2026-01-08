@@ -28,6 +28,7 @@ export function sanitizeHtmlString(input: string): {
     };
   }
 
+  /*
   const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
 
   if (emojiRegex.test(input)) {
@@ -36,6 +37,7 @@ export function sanitizeHtmlString(input: string): {
       error: new Error("Input string contains unsupported emoji characters."),
     };
   }
+  */
 
   input = input.trim();
 
