@@ -6,6 +6,8 @@ export default function getAxiosErrorMessage(
   error: unknown,
   fallbackMessage = "Something went wrong. Please try again.",
 ): string {
+  console.error("Error occurred:", error);
+
   if (axios.isAxiosError<ApiErrorResponse>(error)) {
     const {
       message,

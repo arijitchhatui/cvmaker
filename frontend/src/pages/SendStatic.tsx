@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import { AxiosError } from "axios";
 
+import getAxiosErrorMessage from "../helpers/getAxiosErrorMessage";
 import apiInstance from "../lib/apiInstance";
 
 export default function SendStaticPage() {
@@ -48,17 +48,12 @@ export default function SendStaticPage() {
 
       toast.success("PDF generated successfully from static HTML template!");
     } catch (error) {
-      console.error("Error generating PDF from static HTML template:", error);
-      if (error instanceof AxiosError) {
-        toast.error(
-          error.response?.data.message ||
-            "Failed to generate PDF from static HTML template. Please try again.",
-        );
-      } else {
-        toast.error(
-          "Failed to generate PDF from static HTML template. Please try again.",
-        );
-      }
+      const errorMessage = getAxiosErrorMessage(
+        error,
+        "Failed to generate PDF from static HTML template. Please try again.",
+      );
+
+      toast.error(errorMessage);
     } finally {
       setIsLoading(false);
     }

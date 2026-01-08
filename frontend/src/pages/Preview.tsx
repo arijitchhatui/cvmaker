@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import { AxiosError } from "axios";
 
+import getAxiosErrorMessage from "../helpers/getAxiosErrorMessage";
 import apiInstance from "../lib/apiInstance";
 import { useCVsStore } from "../stores/cVsStore";
 import type { CV, TemplateIds } from "../types";
@@ -37,14 +37,12 @@ export default function PreviewPage() {
 
       setHtml(response.data);
     } catch (error) {
-      console.error("Error generating CV preview:", error);
-      if (error instanceof AxiosError) {
-        toast.error(
-          error.response?.data.message || t("FailedToGeneratePreview"),
-        );
-      } else {
-        toast.error(t("FailedToGeneratePreview"));
-      }
+      const errorMessage = getAxiosErrorMessage(
+        error,
+        t("FailedToGeneratePreview"),
+      );
+
+      toast.error(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -94,12 +92,12 @@ export default function PreviewPage() {
       link.remove();
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      console.error("Error generating CV pdf:", error);
-      if (error instanceof AxiosError) {
-        toast.error(error.response?.data.message || t("FailedToGeneratePDF"));
-      } else {
-        toast.error(t("FailedToGeneratePDF"));
-      }
+      const errorMessage = getAxiosErrorMessage(
+        error,
+        t("FailedToGeneratePDF"),
+      );
+
+      toast.error(errorMessage);
     } finally {
       setIsLoading(false);
       setDownloadProgress(0);
