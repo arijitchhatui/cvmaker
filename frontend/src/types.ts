@@ -88,3 +88,9 @@ export interface CV {
 }
 
 export type TemplateIds = "template1" | "template2" | "template3" | "template4";
+
+export type ApiErrorResponse = {
+  statusCode: number;
+  message?: string | string[];
+  error: string;
+};
