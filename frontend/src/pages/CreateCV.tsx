@@ -21,6 +21,7 @@ export default function CreateCVPage() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+
     try {
       const validation = validateCVFormSubmit(cV);
 

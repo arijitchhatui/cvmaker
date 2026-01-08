@@ -12,8 +12,9 @@ export default function SettingsPage() {
   const { cVs, createCV, updateCV, deleteCV, deleteAllCVs } = useCVsStore();
   const { setLocale } = useUserStore();
 
-  const handleImportCVs = async (e: React.FormEvent) => {
+  async function handleImportCVs(e: React.FormEvent) {
     e.preventDefault();
+
     const inputRaw = document.getElementById("cv-backup");
 
     if (!inputRaw) return;
@@ -40,7 +41,7 @@ export default function SettingsPage() {
         toast.error(t("ErrorImportingCVs"));
       }
     }
-  };
+  }
 
   return (
     <main className="min-h-screen bg-zinc-950 px-6 py-10 text-zinc-100">
